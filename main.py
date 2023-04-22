@@ -1,30 +1,31 @@
 from bottle import route, request, post, run, template
 from io import BytesIO
+import json
+import base64
 from PIL import Image
-import json, base64, os, socket
+from transformers import BridgeTowerForImageAndTextRetrieval, BridgeTowerProcessor
 
 
-IMG_ROOT = 'concept_images'
+model_id = "BridgeTower/bridgetower-large-itm-mlm-gaudi"
+processor = BridgeTowerProcessor.from_pretrained(model_id)
+model = BridgeTowerForImageAndTextRetrieval.from_pretrained(model_id)
 
-@route('/finetuning', method='POST')
-def finetuning():
-    print('i am called')
-    os.makedirs(IMG_ROOT, exist_ok=True)
-
+@route('/bridgetower', method='POST')
+@route('/bridgetower', method='GET')
+def bridgetower():
     # step 1: parse parameters
     data = json.loads(request.body.read())
-    for i, img in enumerate(data['files_to_upload']):
-        img_byte = base64.b64decode(img)
-        img_pil = Image.open(BytesIO(img_byte))
-        img_pil.save(f'{IMG_ROOT}/{i + 1}.png')
-
-    # step 2: launch worker job, need to change aws
-    hostname = socket.gethostname()
-    os.system(f'/home/ec2-user/aia-diffuser-opt/third_party/diffusers/examples/textual_inversion/training_ddp_kding1.sh {hostname}')
+    img_pil = Image.open(BytesIO(base64.b64decode(data['image'])))
+    texts = data['texts'].split(",")
+    scores = {}
+    for text in texts:
+        encoding = processor(img_pil, text, return_tensors="pt")
+        outputs = model(**encoding)
+        scores[text] = "{:.2f}".format(outputs.logits[0, 1].item())
 
     # step 3: return
-    return {"model_name": "kding1/dicoo_model_ddp"}
+    scores = dict(sorted(scores.items(), key=lambda item: item[1], reverse=True))
+    return scores
 
 
 run(host='0.0.0.0', port=8080)
-
