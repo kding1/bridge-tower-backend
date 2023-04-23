@@ -1,5 +1,4 @@
 import os
-
 from bottle import route, request, post, run, template
 from io import BytesIO
 import json
