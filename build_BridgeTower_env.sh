@@ -8,7 +8,8 @@ cd transformers
 pip install .
 yes | conda install -c conda-forge huggingface_hub
 yes | conda install pytorch  cpuonly -c pytorch
-yes | conda install -c intel intel-extension-for-pytorch
+yes | pip install intel_extension_for_pytorch -f https://developer.intel.com/ipex-whl-stable-cpu
+#yes | conda install -c intel intel-extension-for-pytorch
 yes | conda install -c anaconda requests
 yes | conda install -c conda-forge pillow=9
 yes | pip install opencv-python
