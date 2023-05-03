@@ -10,6 +10,9 @@ import intel_extension_for_pytorch as ipex
 import csv
 import time
 
+import torch.onnx
+from torchviz import make_dot
+from deep_learning_performance_advisor.utils import graph_vis
 task = 'itc' #, 'itc', 'itm', 'mlm'
 jit = True
 
@@ -34,12 +37,17 @@ elif task == 'itc': #image txt matching contrastive
     processor = BridgeTowerProcessor.from_pretrained("BridgeTower/bridgetower-large-itm-mlm-itc")
     model = BridgeTowerForContrastiveLearning.from_pretrained("BridgeTower/bridgetower-large-itm-mlm-itc")
     model = ipex.optimize(model)
+    # torch.save(model.bridgetower.vision_model.visual.transformer.resblocks[0],'BridgeTowerResidualAttention_vis.pt')
+    # torch.save(model.bridgetower.text_model.encoder.layer[0],'BridgeTowerTextLayer.pt')
+    # torch.save(model.bridgetower.cross_modal_image_layers[0],'BridgeTowerBertCrossLayer_cross_vis.pt')
+    # torch.save(model.bridgetower.cross_modal_text_layers[0],'BridgeTowerBertCrossLayer_cross_txt.pt')
+    torch.save(model.bridgetower.text_model.embeddings,'BridgeTowerTextEmbeddings.pt')
     model.config.return_dict = False
     #for profiling only passing one image and one text
     encoding = processor(images[0], texts[0], return_tensors="pt")
     if jit:
         model = torch.jit.trace(model,example_kwarg_inputs=dict(encoding), check_trace=False, strict=False)
-        model = torch.jit.freeze(model)        
+        model = torch.jit.freeze(model)       
 elif task == 'itm': #image-txt matching
     url = "http://images.cocodataset.org/val2017/000000039769.jpg"
     image = Image.open(requests.get(url, stream=True).raw)
