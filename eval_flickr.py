@@ -88,7 +88,7 @@ elif precision == 'int8':
                                     recipes = recipes,
                                     op_type_dict=op_type_dict,) 
 
-    q_model = quantization.fit(model=model,
+    model = quantization.fit(model=model,
                             conf=conf,
                             calib_dataloader=dataloader)
 
