@@ -18,16 +18,12 @@ import intel_extension_for_pytorch as ipex
 from contextlib import nullcontext
 import time
 
-if torch.cuda.is_available():
-    device = torch.device('cuda')
-else:
-    device = torch.device('cpu')
-
-bf16 = True
+device = torch.device('cpu')
+bf16 = False
 
 #model_name = 'pretrained/bridgetower-large-itc-itm-mlm-v0.1'
 feature_extractor_path = "pretrained/BridgeTowerImageFeatureExtractorLarge.ckpt"
-filepath = '/home/rbrugaro/bridge-tower-backend/f30k_caption_karpathy_test.arrow'
+filepath = '/home/maktukma/projects/bridgetower/flickr30k/f30k_caption_karpathy_test.arrow'
 
 model = BridgeTowerForContrastiveLearning.from_pretrained("BridgeTower/bridgetower-large-itm-mlm-itc")
 model = ipex.optimize(model,
@@ -51,10 +47,7 @@ class FlickrDataset(Dataset):
         caption = self.table['caption'][index][0].as_py()
         image_id = self.table['image_id'][index].as_py()
 
-
-        
         return (image_id, caption, img)
-        
 
 def collate_fn(batch_list):
     image_ids, captions, images = list(zip(*batch_list))
