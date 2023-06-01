@@ -110,7 +110,7 @@ if True:
 
         with torch.no_grad():
             with torch.cpu.amp.autocast() if precision == 'bf16' else nullcontext():
-                outputs = model(**batch, output_hidden_states=True)
+                outputs = model(**batch)
 
         batch_size = len(captions)
         for bidx in range(batch_size):
