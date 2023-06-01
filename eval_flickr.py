@@ -38,13 +38,14 @@ collate_fn = MyCollator(processor, return_ids_capt = True)
 dataloader_eval = DataLoader(dataset, batch_size=16, shuffle=False, drop_last=True, collate_fn=collate_fn, sampler = sampler)
 
 model = BridgeTowerForContrastiveLearning.from_pretrained("BridgeTower/bridgetower-large-itm-mlm-itc")
+model.config.return_dict = False
 if precision == 'bf16' or precision == 'fp32':
     model = ipex.optimize(model,
                         auto_kernel_selection=True,
                         dtype=(torch.bfloat16 if precision == 'bf16' else torch.float32))
 elif precision == 'int8':
     recipes = {
-        "smooth_quant": False,
+        "smooth_quant": True,
         "smooth_quant_args": {
             "alpha": 0.5,
             "folding": True,
