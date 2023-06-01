@@ -97,8 +97,8 @@ model.eval()
 
 
 if True:
+    
     extracted_embeddings = {}
-
     start_time=time.time()
     for _, batch in enumerate(tqdm(dataloader_eval)):    
 
@@ -109,8 +109,7 @@ if True:
         del batch['image_ids']
 
         with torch.no_grad():
-            with torch.cpu.amp.autocast() if precision == 'bf16' else nullcontext():
-                outputs = model(**batch)
+            outputs = model(**batch)
 
         batch_size = len(captions)
         for bidx in range(batch_size):
@@ -118,9 +117,9 @@ if True:
             text = captions[bidx]
             extracted_embeddings[image_id] = {
                 'caption': text,
-                'text_embed': outputs['text_embeds'][bidx],
-                'image_embed': outputs['image_embeds'][bidx],
-                'cross_embed': outputs['cross_embeds'][bidx],
+                'text_embed': outputs[1][bidx],
+                'image_embed': outputs[2][bidx],
+                'cross_embed': outputs[3][bidx],
             }
     print("inference time Flickr: ", time.time()-start_time)
 
