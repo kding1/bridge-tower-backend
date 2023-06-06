@@ -21,6 +21,7 @@ from utils import disable_quant_conv_bridge_tower, FlickrDataset, MyCollator
 from torch.utils.data.sampler import SequentialSampler, SubsetRandomSampler, BatchSampler
 from neural_compressor import quantization
 from neural_compressor.config import PostTrainingQuantConfig
+from accelerate import init_empty_weights
 
 precision = 'int8' #bf16, fp32, int8
 
@@ -48,7 +49,7 @@ elif precision == 'int8':
         "smooth_quant": True,
         "smooth_quant_args": {
             "alpha": 0.5,
-            "folding": True,
+            "folding": False,
         },
     }
 
@@ -83,7 +84,15 @@ elif precision == 'int8':
             'activation': {
                 'dtype': ['fp32']
             }
-        }
+        },
+        'matmul': {
+            'weight': {
+                'dtype': ['fp32']
+            },
+            'activation': {
+                'dtype': ['fp32']
+            }
+        },
     }
     conf = PostTrainingQuantConfig( backend="ipex",
                                     recipes = recipes,
@@ -94,6 +103,8 @@ elif precision == 'int8':
                             calib_dataloader=dataloader)
 
 model.eval()
+print('Smoothquant optimized layers:', model.absorb_to_layer.values())
+
 
 
 if True:
@@ -107,6 +118,11 @@ if True:
 
         del batch['captions']
         del batch['image_ids']
+
+        #with torch.no_grad():
+        #    model = torch.jit.trace(model, example_kwarg_inputs=dict(batch), check_trace=False, strict=False)
+        #    model = torch.jit.freeze(model)
+        #torch.jit.save(model, 'model_traced.pt')
 
         with torch.no_grad():
             outputs = model(**batch)

@@ -4,13 +4,9 @@ eval "$(conda shell.bash hook)"
 
 conda activate BT
 
-
-python -m pip install cmake
-python -m pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cpu
-ABI=$(python -c "import torch; print(int(torch._C._GLIBCXX_USE_CXX11_ABI))")
-
-python -m pip install -r requirements.txt
-python -m pip install --force-reinstall *.whl
+git clone -b bt_dev https://github.com/intel-innersource/frameworks.ai.pytorch.ipex-cpu.git
+wget https://raw.githubusercontent.com/intel/intel-extension-for-pytorch/v2.0.100+cpu/scripts/compile_bundle.sh
+bash compile_bundle.sh
 
 
 git clone https://github.com/huggingface/transformers
