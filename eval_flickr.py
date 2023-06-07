@@ -36,7 +36,7 @@ sampler = SubsetRandomSampler(list(range(calib_samples)))
 collate_fn = MyCollator(processor, return_ids_capt = False)
 dataloader = DataLoader(dataset, batch_size=16, shuffle=False, drop_last=True, collate_fn=collate_fn, sampler = sampler)
 collate_fn = MyCollator(processor, return_ids_capt = True)
-dataloader_eval = DataLoader(dataset, batch_size=16, shuffle=False, drop_last=True, collate_fn=collate_fn, sampler = sampler)
+dataloader_eval = DataLoader(dataset, batch_size=16, shuffle=False, drop_last=True, collate_fn=collate_fn)
 
 model = BridgeTowerForContrastiveLearning.from_pretrained("BridgeTower/bridgetower-large-itm-mlm-itc")
 model.config.return_dict = False
@@ -44,6 +44,7 @@ if precision == 'bf16' or precision == 'fp32':
     model = ipex.optimize(model,
                         auto_kernel_selection=True,
                         dtype=(torch.bfloat16 if precision == 'bf16' else torch.float32))
+    # Need tracing if the inference performance will be measured
 elif precision == 'int8':
     recipes = {
         "smooth_quant": True,
@@ -52,7 +53,6 @@ elif precision == 'int8':
             "folding": False,
         },
     }
-
     op_type_dict = {
         "add": {"weight": {"dtype": ["fp32"]}, "activation": {"dtype": ["fp32"]}},
         "linear": {
@@ -103,9 +103,7 @@ elif precision == 'int8':
                             calib_dataloader=dataloader)
 
 model.eval()
-print('Smoothquant optimized layers:', model.absorb_to_layer.values())
-
-
+#print('Smoothquant optimized layers:', model.absorb_to_layer.values())
 
 if True:
     
