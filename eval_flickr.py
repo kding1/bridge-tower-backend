@@ -22,7 +22,11 @@ from torch.utils.data.sampler import SequentialSampler, SubsetRandomSampler, Bat
 from neural_compressor import quantization
 from neural_compressor.config import PostTrainingQuantConfig
 from accelerate import init_empty_weights
+from torch.profiler import ProfilerActivity, profile, record_function
 
+
+evaluate = False
+prof = True
 precision = 'int8' #bf16, fp32, int8
 
 device = torch.device('cpu')
@@ -40,11 +44,19 @@ dataloader_eval = DataLoader(dataset, batch_size=16, shuffle=False, drop_last=Tr
 
 model = BridgeTowerForContrastiveLearning.from_pretrained("BridgeTower/bridgetower-large-itm-mlm-itc")
 model.config.return_dict = False
+
+inp = next(iter(dataloader))
+
 if precision == 'bf16' or precision == 'fp32':
     model = ipex.optimize(model,
                         auto_kernel_selection=True,
                         dtype=(torch.bfloat16 if precision == 'bf16' else torch.float32))
     # Need tracing if the inference performance will be measured
+    with torch.no_grad():
+        with torch.cpu.amp.autocast() if precision == 'bf16' else nullcontext():
+            model = torch.jit.trace(model,example_kwarg_inputs=dict(inp), check_trace=False, strict=False)
+            model = torch.jit.freeze(model)
+
 elif precision == 'int8':
     recipes = {
         "smooth_quant": True,
@@ -105,7 +117,7 @@ elif precision == 'int8':
 model.eval()
 #print('Smoothquant optimized layers:', model.absorb_to_layer.values())
 
-if True:
+if evaluate:
     
     extracted_embeddings = {}
     start_time=time.time()
@@ -117,13 +129,9 @@ if True:
         del batch['captions']
         del batch['image_ids']
 
-        #with torch.no_grad():
-        #    model = torch.jit.trace(model, example_kwarg_inputs=dict(batch), check_trace=False, strict=False)
-        #    model = torch.jit.freeze(model)
-        #torch.jit.save(model, 'model_traced.pt')
-
         with torch.no_grad():
-            outputs = model(**batch)
+            with torch.cpu.amp.autocast() if precision == 'bf16' else nullcontext():
+                outputs = model(**batch)
 
         batch_size = len(captions)
         for bidx in range(batch_size):
@@ -176,3 +184,35 @@ if True:
     for top_k in top_ks:
         print(f'Recall@{top_k}: {100*np.mean(recall_res[top_k])}')
 
+if prof:
+
+    wait = 1
+    warmup = 5
+    active = 10
+    # Profile
+    def trace_handler(p):
+        timestr = time.strftime("%Y%m%d-%H%M%S")
+        output = p.key_averages().table(sort_by="cpu_time_total", row_limit=20)
+        print(output)
+        output = p.key_averages().table(sort_by="cpu_time_total")
+
+    with profile(activities=[ProfilerActivity.CPU],
+            schedule=torch.profiler.schedule(
+            wait=wait,
+            warmup=warmup,
+            active=active),
+            on_trace_ready=trace_handler,
+            profile_memory=False, 
+            with_stack = False,
+            with_flops = False,
+            with_modules = True,
+            record_shapes=True
+            ) as prof:
+
+        for i in range(200):
+            
+            with torch.no_grad():
+                output = model(**inp)
+            prof.step()
+            if i == wait + warmup + active - 1:
+                break
