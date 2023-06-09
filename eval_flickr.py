@@ -25,8 +25,8 @@ from accelerate import init_empty_weights
 from torch.profiler import ProfilerActivity, profile, record_function
 
 
-evaluate = False
-prof = True
+evaluate = True
+prof = False
 precision = 'int8' #bf16, fp32, int8
 
 device = torch.device('cpu')
