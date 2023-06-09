@@ -4,8 +4,7 @@ eval "$(conda shell.bash hook)"
 
 conda activate BT
 
-git clone -b bt_dev https://github.com/intel-innersource/frameworks.ai.pytorch.ipex-cpu.git
-wget https://raw.githubusercontent.com/intel/intel-extension-for-pytorch/v2.0.100+cpu/scripts/compile_bundle.sh
+git clone -b maktukmak/fix_conv2d_save_quant https://github.com/intel-innersource/frameworks.ai.pytorch.ipex-cpu.git
 bash compile_bundle.sh
 
 
@@ -14,7 +13,7 @@ cd transformers
 pip install .
 cd ..
 
-git clone -b bt_dev https://github.com/intel/neural-compressor
+git clone -b master https://github.com/intel/neural-compressor
 cd neural-compressor
 pip install .
 cd ..

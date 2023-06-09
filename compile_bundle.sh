@@ -6,7 +6,7 @@ VER_LLVM="llvmorg-13.0.0"
 VER_PYTORCH=""
 VER_TORCHVISION=""
 VER_TORCHAUDIO=""
-VER_IPEX="bt_dev"
+VER_IPEX="maktukmak/fix_conv2d_save_quant"
 
 # Check existance of required Linux commands
 for CMD in gcc g++ python git nproc; do
