@@ -13,7 +13,7 @@ cd transformers
 pip install .
 cd ..
 
-git clone -b master https://github.com/intel/neural-compressor
+git clone -b maktukmak/fix_mismatch_ops https://github.com/intel/neural-compressor
 cd neural-compressor
 pip install .
 cd ..

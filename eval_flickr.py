@@ -23,10 +23,14 @@ from neural_compressor import quantization
 from neural_compressor.config import PostTrainingQuantConfig
 from accelerate import init_empty_weights
 from torch.profiler import ProfilerActivity, profile, record_function
+import os
+#os.environ['ONEDNN_VERBOSE'] = '1'
+#os.environ['DNNL_GRAPH_VERBOSE'] = '2'
+#os.environ['ONEDNN_GRAPH_VERBOSE'] = '1'
 
 
-evaluate = True
-prof = False
+evaluate = False
+prof_on = True
 precision = 'int8' #bf16, fp32, int8
 
 device = torch.device('cpu')
@@ -44,12 +48,14 @@ dataloader_eval = DataLoader(dataset, batch_size=16, shuffle=False, drop_last=Tr
 
 model = BridgeTowerForContrastiveLearning.from_pretrained("BridgeTower/bridgetower-large-itm-mlm-itc")
 model.config.return_dict = False
+model.eval()
 
 inp = next(iter(dataloader))
 
+
 if precision == 'bf16' or precision == 'fp32':
     model = ipex.optimize(model,
-                        auto_kernel_selection=True,
+                        auto_kernel_selection=False,
                         dtype=(torch.bfloat16 if precision == 'bf16' else torch.float32))
     # Need tracing if the inference performance will be measured
     with torch.no_grad():
@@ -59,7 +65,7 @@ if precision == 'bf16' or precision == 'fp32':
 
 elif precision == 'int8':
     recipes = {
-        "smooth_quant": True,
+        "smooth_quant": False,
         "smooth_quant_args": {
             "alpha": 0.5,
             "folding": False,
@@ -108,13 +114,14 @@ elif precision == 'int8':
     }
     conf = PostTrainingQuantConfig( backend="ipex",
                                     recipes = recipes,
+                                    calibration_sampling_size = calib_samples,
                                     op_type_dict=op_type_dict,) 
 
     model = quantization.fit(model=model,
                             conf=conf,
                             calib_dataloader=dataloader)
 
-model.eval()
+    
 #print('Smoothquant optimized layers:', model.absorb_to_layer.values())
 
 if evaluate:
@@ -125,6 +132,8 @@ if evaluate:
 
         captions = copy(batch['captions'])
         image_ids = copy(batch['image_ids'])
+
+        print(batch['input_ids'].shape[1])
 
         del batch['captions']
         del batch['image_ids']
@@ -184,17 +193,15 @@ if evaluate:
     for top_k in top_ks:
         print(f'Recall@{top_k}: {100*np.mean(recall_res[top_k])}')
 
-if prof:
+if prof_on:
 
-    wait = 1
+    wait = 5
     warmup = 5
-    active = 10
+    active = 5
     # Profile
     def trace_handler(p):
-        timestr = time.strftime("%Y%m%d-%H%M%S")
         output = p.key_averages().table(sort_by="cpu_time_total", row_limit=20)
         print(output)
-        output = p.key_averages().table(sort_by="cpu_time_total")
 
     with profile(activities=[ProfilerActivity.CPU],
             schedule=torch.profiler.schedule(
@@ -209,10 +216,14 @@ if prof:
             record_shapes=True
             ) as prof:
 
-        for i in range(200):
+        #for i in range(200):
+        for i, batch in enumerate(dataloader_eval):  
             
+            del batch['captions']
+            del batch['image_ids']
+
             with torch.no_grad():
-                output = model(**inp)
+                output = model(**batch)
             prof.step()
             if i == wait + warmup + active - 1:
                 break
