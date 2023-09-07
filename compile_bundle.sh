@@ -8,6 +8,8 @@ VER_TORCHVISION=""
 VER_TORCHAUDIO=""
 VER_IPEX="maktukmak/fix_conv2d_save_quant"
 
+export CC=`which gcc`
+export CXX=`which g++`
 # Check existance of required Linux commands
 for CMD in gcc g++ python git nproc; do
     command -v ${CMD} || (echo "Error: Command \"${CMD}\" not found." ; exit 4)
@@ -37,10 +39,11 @@ if [ ! -z ${VER_LLVM} ]; then
 fi
 git submodule sync
 git submodule update --init --recursive
-cd ../frameworks.ai.pytorch.ipex-cpu
-if [ ! -z ${VER_IPEX} ]; then
-    git checkout ${VER_IPEX}
-fi
+#cd ../frameworks.ai.pytorch.ipex-cpu
+cd ../ipex_xiaobing
+#if [ ! -z ${VER_IPEX} ]; then
+#    git checkout ${VER_IPEX}
+#fi
 git submodule sync
 git submodule update --init --recursive
 
@@ -57,7 +60,7 @@ if [ -d build ]; then
 fi
 mkdir build
 cd build
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=${ABI}" -DLLVM_TARGETS_TO_BUILD=X86 -DLLVM_ENABLE_TERMINFO=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF ../llvm/
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=${ABI}" -DCMAKE_CXX_LINK_FLAGS="-Wl,-rpath,/usr/local/lib64 -L/usr/local/lib64" -DLLVM_TARGETS_TO_BUILD=X86 -DLLVM_ENABLE_TERMINFO=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF ../llvm/
 cmake --build . -j ${MAX_JOBS_VAR}
 LLVM_ROOT="$(pwd)/../release"
 if [ -d ${LLVM_ROOT} ]; then
@@ -66,11 +69,13 @@ fi
 cmake -DCMAKE_INSTALL_PREFIX=${LLVM_ROOT}/../release/ -P cmake_install.cmake
 #xargs rm -rf < install_manifest.txt
 ln -s ${LLVM_ROOT}/bin/llvm-config ${LLVM_ROOT}/bin/llvm-config-13
+
 export PATH=${LLVM_ROOT}/bin:$PATH
 export LD_LIBRARY_PATH=${LLVM_ROOT}/lib:$LD_LIBRARY_PATH
 cd ..
 #  Intel® Extension for PyTorch*
-cd ../frameworks.ai.pytorch.ipex-cpu
+#cd ../frameworks.ai.pytorch.ipex-cpu
+cd ../ipex_xiaobing
 python -m pip install -r requirements.txt
 export USE_LLVM=${LLVM_ROOT}
 export LLVM_DIR=${USE_LLVM}/lib/cmake/llvm
