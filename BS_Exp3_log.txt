@@ -1,0 +1,1144 @@
+[W OperatorEntry.cpp:153] Warning: Warning only once for all operators,  other operators may also be overrided.
+  Overriding a previously registered kernel for the same operator and the same dispatch key
+  operator: aten::conv1d(Tensor input, Tensor weight, Tensor? bias=None, int[1] stride=[1], SymInt[1] padding=[0], int[1] dilation=[1], int groups=1) -> Tensor
+    registered at aten/src/ATen/RegisterSchema.cpp:6
+  dispatch key: AutocastCPU
+  previous kernel: registered at ../aten/src/ATen/autocast_mode.cpp:216
+       new kernel: registered at /home/rbrugaro/bridge-tower-backend/frameworks.ai.pytorch.ipex-cpu/csrc/cpu/autocast/autocast_mode.cpp:164 (function operator())
+Namespace(precision='fp32', batch_size='1', calib_samples='32')
+Some weights of the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc were not used when initializing BridgeTowerForContrastiveLearning: ['mlm_score.bias', 'mlm_score.transform.LayerNorm.bias', 'mlm_score.transform.LayerNorm.weight', 'bridgetower.vision_model.visual.positional_embedding', 'bridgetower.vision_model.visual.class_embedding', 'mlm_score.decoder.weight', 'mlm_score.transform.dense.weight', 'mlm_score.transform.dense.bias', 'itm_score.fc.weight', 'itm_score.fc.bias', 'bridgetower.vision_model.visual.conv1.weight']
+- This IS expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BridgeTowerForContrastiveLearning were not initialized from the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc and are newly initialized: ['logit_scale', 'bridgetower.vision_model.visual.embeddings.position_ids']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+torch.Size([1, 100])
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/frontend.py:578: UserWarning: Conv BatchNorm folding failed during the optimize process.
+  warnings.warn(
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/frontend.py:585: UserWarning: Linear BatchNorm folding failed during the optimize process.
+  warnings.warn(
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+STAGE:2023-06-16 15:26:02 2377995:2377995 ActivityProfilerController.cpp:312] Completed Stage: Warm Up
+STAGE:2023-06-16 15:26:48 2377995:2377995 ActivityProfilerController.cpp:318] Completed Stage: Collection
+STAGE:2023-06-16 15:26:48 2377995:2377995 ActivityProfilerController.cpp:322] Completed Stage: Post Processing
+--------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                        Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls  
+--------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                               ProfilerStep*         0.12%      53.961ms       100.00%       44.769s     447.689ms           100  
+                                     forward         2.24%        1.001s        99.88%       44.715s     447.149ms           100  
+                 ipex_prepack::mkl_sgemm_run        45.48%       20.360s        45.78%       20.496s     895.032us         22900  
+          aten::scaled_dot_product_attention         0.04%      17.230ms        17.45%        7.810s       3.254ms          2400  
+    aten::_scaled_dot_product_attention_math         0.08%      36.595ms        17.40%        7.791s       3.246ms          2400  
+                                aten::linear         0.19%      85.233ms        12.95%        5.798s       1.208ms          4800  
+                                 aten::addmm        11.40%        5.105s        12.64%        5.659s       1.179ms          4800  
+                                aten::matmul         0.32%     145.265ms         8.45%        3.781s     787.683us          4800  
+                                   aten::bmm         7.87%        3.521s         7.87%        3.521s     733.596us          4800  
+                               aten::softmax         0.09%      40.221ms         7.16%        3.207s       1.336ms          2400  
+                              aten::_softmax         7.13%        3.193s         7.13%        3.193s       1.331ms          2400  
+                         dil_mha_scores_calc         0.12%      52.731ms         7.09%        3.175s     661.373us          4800  
+                                     dil_bmm         5.32%        2.382s         5.39%        2.415s     251.535us          9600  
+                              dil_addsoftmax         3.30%        1.477s         3.48%        1.557s     324.353us          4800  
+                                 aten::copy_         2.59%        1.158s         2.59%        1.158s      76.193us         15200  
+                       fused_mul_sigmoid_mul         2.39%        1.072s         2.39%        1.072s     446.610us          2400  
+                            aten::layer_norm         0.14%      61.660ms         2.24%        1.005s     173.282us          5800  
+                      torch_ipex::layer_norm         2.13%     953.029ms         2.18%     977.444ms     168.525us          5800  
+                                 dil_mha_bmm         0.15%      68.730ms         2.17%     970.138ms     202.112us          4800  
+                           dil_add_layernorm         1.57%     704.957ms         1.78%     798.726ms      82.343us          9700  
+--------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 44.769s
+
+[W OperatorEntry.cpp:153] Warning: Warning only once for all operators,  other operators may also be overrided.
+  Overriding a previously registered kernel for the same operator and the same dispatch key
+  operator: aten::conv1d(Tensor input, Tensor weight, Tensor? bias=None, int[1] stride=[1], SymInt[1] padding=[0], int[1] dilation=[1], int groups=1) -> Tensor
+    registered at aten/src/ATen/RegisterSchema.cpp:6
+  dispatch key: AutocastCPU
+  previous kernel: registered at ../aten/src/ATen/autocast_mode.cpp:216
+       new kernel: registered at /home/rbrugaro/bridge-tower-backend/frameworks.ai.pytorch.ipex-cpu/csrc/cpu/autocast/autocast_mode.cpp:164 (function operator())
+Namespace(precision='fp32', batch_size='16', calib_samples='32')
+Some weights of the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc were not used when initializing BridgeTowerForContrastiveLearning: ['bridgetower.vision_model.visual.class_embedding', 'mlm_score.transform.LayerNorm.bias', 'itm_score.fc.bias', 'itm_score.fc.weight', 'bridgetower.vision_model.visual.conv1.weight', 'bridgetower.vision_model.visual.positional_embedding', 'mlm_score.transform.dense.weight', 'mlm_score.transform.LayerNorm.weight', 'mlm_score.transform.dense.bias', 'mlm_score.decoder.weight', 'mlm_score.bias']
+- This IS expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BridgeTowerForContrastiveLearning were not initialized from the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc and are newly initialized: ['logit_scale', 'bridgetower.vision_model.visual.embeddings.position_ids']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+torch.Size([16, 100])
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/frontend.py:578: UserWarning: Conv BatchNorm folding failed during the optimize process.
+  warnings.warn(
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/frontend.py:585: UserWarning: Linear BatchNorm folding failed during the optimize process.
+  warnings.warn(
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+STAGE:2023-06-16 15:30:26 2378747:2378747 ActivityProfilerController.cpp:312] Completed Stage: Warm Up
+STAGE:2023-06-16 15:34:06 2378747:2378747 ActivityProfilerController.cpp:318] Completed Stage: Collection
+STAGE:2023-06-16 15:34:06 2378747:2378747 ActivityProfilerController.cpp:322] Completed Stage: Post Processing
+--------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                        Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls  
+--------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                               ProfilerStep*         0.02%      51.128ms       100.00%      217.121s        2.171s           100  
+                                     forward         2.40%        5.203s        99.98%      217.070s        2.171s           100  
+                 ipex_prepack::mkl_sgemm_run        37.81%       82.098s        38.00%       82.510s       3.603ms         22900  
+          aten::scaled_dot_product_attention         1.58%        3.421s        19.56%       42.477s      17.699ms          2400  
+    aten::_scaled_dot_product_attention_math         0.82%        1.771s        17.99%       39.056s      16.273ms          2400  
+                                aten::linear         0.05%     109.580ms        11.17%       24.258s       5.054ms          4800  
+                                 aten::addmm         8.45%       18.337s        11.08%       24.064s       5.013ms          4800  
+                                aten::matmul         0.09%     201.123ms         9.43%       20.483s       4.267ms          4800  
+                                   aten::bmm         9.26%       20.116s         9.26%       20.116s       4.191ms          4800  
+                                 aten::copy_         8.86%       19.231s         8.86%       19.231s     938.091us         20500  
+                            aten::contiguous         0.31%     667.768ms         6.87%       14.906s       1.000ms         14900  
+                                 aten::clone         0.28%     611.702ms         6.45%       13.999s       1.372ms         10200  
+                            aten::layer_norm         0.05%     106.741ms         6.07%       13.173s       2.233ms          5900  
+                      torch_ipex::layer_norm         3.18%        6.902s         6.05%       13.134s       2.226ms          5900  
+                                     dil_bmm         4.83%       10.482s         4.86%       10.552s       1.099ms          9600  
+                         dil_mha_scores_calc         0.39%     844.916ms         4.85%       10.520s       2.192ms          4800  
+                               aten::softmax         0.01%      25.102ms         4.27%        9.262s       3.859ms          2400  
+                              aten::_softmax         4.26%        9.245s         4.26%        9.245s       3.852ms          2400  
+                                   aten::add         3.69%        8.019s         3.69%        8.019s       1.273ms          6300  
+                                   aten::mul         3.45%        7.484s         3.49%        7.576s     770.304us          9835  
+--------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 217.121s
+
+[W OperatorEntry.cpp:153] Warning: Warning only once for all operators,  other operators may also be overrided.
+  Overriding a previously registered kernel for the same operator and the same dispatch key
+  operator: aten::conv1d(Tensor input, Tensor weight, Tensor? bias=None, int[1] stride=[1], SymInt[1] padding=[0], int[1] dilation=[1], int groups=1) -> Tensor
+    registered at aten/src/ATen/RegisterSchema.cpp:6
+  dispatch key: AutocastCPU
+  previous kernel: registered at ../aten/src/ATen/autocast_mode.cpp:216
+       new kernel: registered at /home/rbrugaro/bridge-tower-backend/frameworks.ai.pytorch.ipex-cpu/csrc/cpu/autocast/autocast_mode.cpp:164 (function operator())
+Namespace(precision='fp32', batch_size='32', calib_samples='32')
+Some weights of the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc were not used when initializing BridgeTowerForContrastiveLearning: ['mlm_score.bias', 'mlm_score.decoder.weight', 'bridgetower.vision_model.visual.positional_embedding', 'mlm_score.transform.dense.weight', 'bridgetower.vision_model.visual.class_embedding', 'mlm_score.transform.LayerNorm.bias', 'mlm_score.transform.LayerNorm.weight', 'bridgetower.vision_model.visual.conv1.weight', 'itm_score.fc.weight', 'itm_score.fc.bias', 'mlm_score.transform.dense.bias']
+- This IS expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BridgeTowerForContrastiveLearning were not initialized from the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc and are newly initialized: ['bridgetower.vision_model.visual.embeddings.position_ids', 'logit_scale']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+torch.Size([32, 100])
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/frontend.py:578: UserWarning: Conv BatchNorm folding failed during the optimize process.
+  warnings.warn(
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/frontend.py:585: UserWarning: Linear BatchNorm folding failed during the optimize process.
+  warnings.warn(
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+STAGE:2023-06-16 15:39:13 2379412:2379412 ActivityProfilerController.cpp:312] Completed Stage: Warm Up
+STAGE:2023-06-16 15:46:08 2379412:2379412 ActivityProfilerController.cpp:318] Completed Stage: Collection
+STAGE:2023-06-16 15:46:08 2379412:2379412 ActivityProfilerController.cpp:322] Completed Stage: Post Processing
+--------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                        Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls  
+--------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                               ProfilerStep*         0.32%        1.306s       100.00%      412.044s        4.120s           100  
+                                     forward         3.94%       16.220s        99.68%      410.738s        4.107s           100  
+                 ipex_prepack::mkl_sgemm_run        41.25%      169.956s        41.37%      170.453s       7.443ms         22900  
+          aten::scaled_dot_product_attention         1.36%        5.589s        17.03%       70.157s      29.232ms          2400  
+    aten::_scaled_dot_product_attention_math         1.50%        6.177s        15.67%       64.568s      26.903ms          2400  
+                                aten::linear         0.57%        2.368s         9.87%       40.656s       8.470ms          4800  
+                                 aten::addmm         7.51%       30.963s         9.27%       38.192s       7.957ms          4800  
+                                aten::matmul         0.05%     219.917ms         8.53%       35.149s       7.323ms          4800  
+                                   aten::bmm         8.43%       34.749s         8.43%       34.749s       7.239ms          4800  
+                                 aten::copy_         6.23%       25.673s         6.23%       25.673s       1.252ms         20500  
+                            aten::contiguous         0.76%        3.126s         5.37%       22.107s       1.484ms         14900  
+                         dil_mha_scores_calc         0.40%        1.662s         5.35%       22.024s       4.588ms          4800  
+                                 aten::clone         0.13%     519.602ms         4.56%       18.785s       1.842ms         10200  
+                            aten::layer_norm         0.01%      59.316ms         4.47%       18.411s       3.121ms          5900  
+                      torch_ipex::layer_norm         2.64%       10.859s         4.46%       18.365s       3.113ms          5900  
+                                     dil_bmm         4.33%       17.846s         4.36%       17.983s       1.873ms          9600  
+                                   aten::add         3.87%       15.957s         3.87%       15.957s       2.533ms          6300  
+                               aten::softmax         0.01%      31.100ms         3.65%       15.029s       6.262ms          2400  
+                              aten::_softmax         3.64%       15.010s         3.64%       15.010s       6.254ms          2400  
+                           dil_add_layernorm         3.11%       12.802s         3.53%       14.529s       1.498ms          9700  
+--------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 412.044s
+
+[W OperatorEntry.cpp:153] Warning: Warning only once for all operators,  other operators may also be overrided.
+  Overriding a previously registered kernel for the same operator and the same dispatch key
+  operator: aten::conv1d(Tensor input, Tensor weight, Tensor? bias=None, int[1] stride=[1], SymInt[1] padding=[0], int[1] dilation=[1], int groups=1) -> Tensor
+    registered at aten/src/ATen/RegisterSchema.cpp:6
+  dispatch key: AutocastCPU
+  previous kernel: registered at ../aten/src/ATen/autocast_mode.cpp:216
+       new kernel: registered at /home/rbrugaro/bridge-tower-backend/frameworks.ai.pytorch.ipex-cpu/csrc/cpu/autocast/autocast_mode.cpp:164 (function operator())
+Namespace(precision='fp32', batch_size='64', calib_samples='64')
+Some weights of the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc were not used when initializing BridgeTowerForContrastiveLearning: ['itm_score.fc.bias', 'mlm_score.transform.LayerNorm.weight', 'itm_score.fc.weight', 'mlm_score.transform.LayerNorm.bias', 'mlm_score.transform.dense.bias', 'bridgetower.vision_model.visual.class_embedding', 'bridgetower.vision_model.visual.conv1.weight', 'mlm_score.decoder.weight', 'bridgetower.vision_model.visual.positional_embedding', 'mlm_score.bias', 'mlm_score.transform.dense.weight']
+- This IS expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BridgeTowerForContrastiveLearning were not initialized from the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc and are newly initialized: ['logit_scale', 'bridgetower.vision_model.visual.embeddings.position_ids']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+torch.Size([64, 100])
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/frontend.py:578: UserWarning: Conv BatchNorm folding failed during the optimize process.
+  warnings.warn(
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/frontend.py:585: UserWarning: Linear BatchNorm folding failed during the optimize process.
+  warnings.warn(
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+STAGE:2023-06-16 15:53:40 2380193:2380193 ActivityProfilerController.cpp:312] Completed Stage: Warm Up
+STAGE:2023-06-16 16:05:30 2380193:2380193 ActivityProfilerController.cpp:318] Completed Stage: Collection
+STAGE:2023-06-16 16:05:31 2380193:2380193 ActivityProfilerController.cpp:322] Completed Stage: Post Processing
+--------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                        Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls  
+--------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                               ProfilerStep*         0.26%        1.828s       100.00%      705.428s        7.054s           100  
+                                     forward         3.60%       25.394s        99.74%      703.600s        7.036s           100  
+                 ipex_prepack::mkl_sgemm_run        39.18%      276.352s        39.26%      276.930s      12.093ms         22900  
+          aten::scaled_dot_product_attention         1.45%       10.259s        18.84%      132.907s      55.378ms          2400  
+    aten::_scaled_dot_product_attention_math         1.44%       10.142s        17.39%      122.647s      51.103ms          2400  
+                                aten::linear         0.47%        3.292s        10.68%       75.305s      15.689ms          4800  
+                                 aten::addmm         8.44%       59.568s        10.19%       71.918s      14.983ms          4800  
+                                aten::matmul         0.03%     239.881ms         9.47%       66.777s      13.912ms          4800  
+                                   aten::bmm         9.40%       66.341s         9.40%       66.341s      13.821ms          4800  
+                                 aten::copy_         6.52%       46.007s         6.52%       46.007s       2.244ms         20500  
+                            aten::contiguous         0.75%        5.285s         5.53%       39.007s       2.618ms         14900  
+                         dil_mha_scores_calc         0.54%        3.836s         5.44%       38.364s       7.992ms          4800  
+                                 aten::clone         0.06%     443.147ms         4.82%       34.008s       3.334ms         10200  
+                                     dil_bmm         4.61%       32.527s         4.62%       32.600s       3.396ms          9600  
+                               aten::softmax         0.00%      20.667ms         4.56%       32.166s      13.402ms          2400  
+                              aten::_softmax         4.56%       32.145s         4.56%       32.145s      13.394ms          2400  
+                            aten::layer_norm         0.01%      62.127ms         4.20%       29.617s       5.020ms          5900  
+                      torch_ipex::layer_norm         2.29%       16.140s         4.19%       29.567s       5.011ms          5900  
+                                   aten::add         3.52%       24.850s         3.52%       24.850s       3.945ms          6300  
+                           dil_add_layernorm         2.44%       17.232s         2.79%       19.704s       2.031ms          9700  
+--------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 705.428s
+
+[W OperatorEntry.cpp:153] Warning: Warning only once for all operators,  other operators may also be overrided.
+  Overriding a previously registered kernel for the same operator and the same dispatch key
+  operator: aten::conv1d(Tensor input, Tensor weight, Tensor? bias=None, int[1] stride=[1], SymInt[1] padding=[0], int[1] dilation=[1], int groups=1) -> Tensor
+    registered at aten/src/ATen/RegisterSchema.cpp:6
+  dispatch key: AutocastCPU
+  previous kernel: registered at ../aten/src/ATen/autocast_mode.cpp:216
+       new kernel: registered at /home/rbrugaro/bridge-tower-backend/frameworks.ai.pytorch.ipex-cpu/csrc/cpu/autocast/autocast_mode.cpp:164 (function operator())
+Namespace(precision='int8', batch_size='1', calib_samples='32')
+Some weights of the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc were not used when initializing BridgeTowerForContrastiveLearning: ['bridgetower.vision_model.visual.positional_embedding', 'mlm_score.transform.LayerNorm.weight', 'bridgetower.vision_model.visual.class_embedding', 'mlm_score.decoder.weight', 'mlm_score.transform.dense.bias', 'bridgetower.vision_model.visual.conv1.weight', 'itm_score.fc.weight', 'mlm_score.bias', 'mlm_score.transform.dense.weight', 'mlm_score.transform.LayerNorm.bias', 'itm_score.fc.bias']
+- This IS expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BridgeTowerForContrastiveLearning were not initialized from the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc and are newly initialized: ['bridgetower.vision_model.visual.embeddings.position_ids', 'logit_scale']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+torch.Size([1, 100])
+2023-06-16 16:08:57 [INFO] Start auto tuning.
+2023-06-16 16:08:57 [INFO] Quantize model without tuning!
+2023-06-16 16:08:57 [INFO] Quantize the model with default configuration without evaluating the model.                To perform the tuning process, please either provide an eval_func or provide an                    eval_dataloader an eval_metric.
+2023-06-16 16:08:57 [INFO] Adaptor has 4 recipes.
+2023-06-16 16:08:57 [INFO] 1 recipes specified by user.
+2023-06-16 16:08:57 [INFO] 3 recipes require future tuning.
+2023-06-16 16:08:57 [INFO] *** Initialize auto tuning
+2023-06-16 16:08:57 [INFO] {
+2023-06-16 16:08:57 [INFO]     'PostTrainingQuantConfig': {
+2023-06-16 16:08:57 [INFO]         'AccuracyCriterion': {
+2023-06-16 16:08:57 [INFO]             'criterion': 'relative',
+2023-06-16 16:08:57 [INFO]             'higher_is_better': True,
+2023-06-16 16:08:57 [INFO]             'tolerable_loss': 0.01,
+2023-06-16 16:08:57 [INFO]             'absolute': None,
+2023-06-16 16:08:57 [INFO]             'keys': <bound method AccuracyCriterion.keys of <neural_compressor.config.AccuracyCriterion object at 0x7fe2770cf160>>,
+2023-06-16 16:08:57 [INFO]             'relative': 0.01
+2023-06-16 16:08:57 [INFO]         },
+2023-06-16 16:08:57 [INFO]         'approach': 'post_training_static_quant',
+2023-06-16 16:08:57 [INFO]         'backend': 'ipex',
+2023-06-16 16:08:57 [INFO]         'calibration_sampling_size': [
+2023-06-16 16:08:57 [INFO]             32
+2023-06-16 16:08:57 [INFO]         ],
+2023-06-16 16:08:57 [INFO]         'device': 'cpu',
+2023-06-16 16:08:57 [INFO]         'diagnosis': False,
+2023-06-16 16:08:57 [INFO]         'domain': 'auto',
+2023-06-16 16:08:57 [INFO]         'example_inputs': None,
+2023-06-16 16:08:57 [INFO]         'excluded_precisions': [
+2023-06-16 16:08:57 [INFO]         ],
+2023-06-16 16:08:57 [INFO]         'framework': 'pytorch_ipex',
+2023-06-16 16:08:57 [INFO]         'inputs': [
+2023-06-16 16:08:57 [INFO]         ],
+2023-06-16 16:08:57 [INFO]         'model_name': '',
+2023-06-16 16:08:57 [INFO]         'op_name_dict': None,
+2023-06-16 16:08:57 [INFO]         'op_type_dict': {
+2023-06-16 16:08:57 [INFO]             'add': {
+2023-06-16 16:08:57 [INFO]                 'weight': {
+2023-06-16 16:08:57 [INFO]                     'dtype': [
+2023-06-16 16:08:57 [INFO]                         'fp32'
+2023-06-16 16:08:57 [INFO]                     ]
+2023-06-16 16:08:57 [INFO]                 },
+2023-06-16 16:08:57 [INFO]                 'activation': {
+2023-06-16 16:08:57 [INFO]                     'dtype': [
+2023-06-16 16:08:57 [INFO]                         'fp32'
+2023-06-16 16:08:57 [INFO]                     ]
+2023-06-16 16:08:57 [INFO]                 }
+2023-06-16 16:08:57 [INFO]             },
+2023-06-16 16:08:57 [INFO]             'linear': {
+2023-06-16 16:08:57 [INFO]                 'weight': {
+2023-06-16 16:08:57 [INFO]                     'dtype': [
+2023-06-16 16:08:57 [INFO]                         'int8'
+2023-06-16 16:08:57 [INFO]                     ],
+2023-06-16 16:08:57 [INFO]                     'scheme': [
+2023-06-16 16:08:57 [INFO]                         'sym'
+2023-06-16 16:08:57 [INFO]                     ],
+2023-06-16 16:08:57 [INFO]                     'granularity': [
+2023-06-16 16:08:57 [INFO]                         'per_channel'
+2023-06-16 16:08:57 [INFO]                     ],
+2023-06-16 16:08:57 [INFO]                     'algorithm': [
+2023-06-16 16:08:57 [INFO]                         'minmax'
+2023-06-16 16:08:57 [INFO]                     ]
+2023-06-16 16:08:57 [INFO]                 },
+2023-06-16 16:08:57 [INFO]                 'activation': {
+2023-06-16 16:08:57 [INFO]                     'dtype': [
+2023-06-16 16:08:57 [INFO]                         'uint8'
+2023-06-16 16:08:57 [INFO]                     ],
+2023-06-16 16:08:57 [INFO]                     'scheme': [
+2023-06-16 16:08:57 [INFO]                         'asym'
+2023-06-16 16:08:57 [INFO]                     ],
+2023-06-16 16:08:57 [INFO]                     'granularity': [
+2023-06-16 16:08:57 [INFO]                         'per_tensor'
+2023-06-16 16:08:57 [INFO]                     ],
+2023-06-16 16:08:57 [INFO]                     'algorithm': [
+2023-06-16 16:08:57 [INFO]                         'minmax'
+2023-06-16 16:08:57 [INFO]                     ]
+2023-06-16 16:08:57 [INFO]                 }
+2023-06-16 16:08:57 [INFO]             },
+2023-06-16 16:08:57 [INFO]             'Conv2d': {
+2023-06-16 16:08:57 [INFO]                 'weight': {
+2023-06-16 16:08:57 [INFO]                     'dtype': [
+2023-06-16 16:08:57 [INFO]                         'fp32'
+2023-06-16 16:08:57 [INFO]                     ]
+2023-06-16 16:08:57 [INFO]                 },
+2023-06-16 16:08:57 [INFO]                 'activation': {
+2023-06-16 16:08:57 [INFO]                     'dtype': [
+2023-06-16 16:08:57 [INFO]                         'fp32'
+2023-06-16 16:08:57 [INFO]                     ]
+2023-06-16 16:08:57 [INFO]                 }
+2023-06-16 16:08:57 [INFO]             },
+2023-06-16 16:08:57 [INFO]             'flatten': {
+2023-06-16 16:08:57 [INFO]                 'weight': {
+2023-06-16 16:08:57 [INFO]                     'dtype': [
+2023-06-16 16:08:57 [INFO]                         'fp32'
+2023-06-16 16:08:57 [INFO]                     ]
+2023-06-16 16:08:57 [INFO]                 },
+2023-06-16 16:08:57 [INFO]                 'activation': {
+2023-06-16 16:08:57 [INFO]                     'dtype': [
+2023-06-16 16:08:57 [INFO]                         'fp32'
+2023-06-16 16:08:57 [INFO]                     ]
+2023-06-16 16:08:57 [INFO]                 }
+2023-06-16 16:08:57 [INFO]             },
+2023-06-16 16:08:57 [INFO]             'matmul': {
+2023-06-16 16:08:57 [INFO]                 'weight': {
+2023-06-16 16:08:57 [INFO]                     'dtype': [
+2023-06-16 16:08:57 [INFO]                         'fp32'
+2023-06-16 16:08:57 [INFO]                     ]
+2023-06-16 16:08:57 [INFO]                 },
+2023-06-16 16:08:57 [INFO]                 'activation': {
+2023-06-16 16:08:57 [INFO]                     'dtype': [
+2023-06-16 16:08:57 [INFO]                         'fp32'
+2023-06-16 16:08:57 [INFO]                     ]
+2023-06-16 16:08:57 [INFO]                 }
+2023-06-16 16:08:57 [INFO]             }
+2023-06-16 16:08:57 [INFO]         },
+2023-06-16 16:08:57 [INFO]         'outputs': [
+2023-06-16 16:08:57 [INFO]         ],
+2023-06-16 16:08:57 [INFO]         'quant_format': 'default',
+2023-06-16 16:08:57 [INFO]         'quant_level': 'auto',
+2023-06-16 16:08:57 [INFO]         'recipes': {
+2023-06-16 16:08:57 [INFO]             'smooth_quant': True,
+2023-06-16 16:08:57 [INFO]             'smooth_quant_args': {
+2023-06-16 16:08:57 [INFO]                 'alpha': 0.5,
+2023-06-16 16:08:57 [INFO]                 'folding': False
+2023-06-16 16:08:57 [INFO]             },
+2023-06-16 16:08:57 [INFO]             'fast_bias_correction': False,
+2023-06-16 16:08:57 [INFO]             'weight_correction': False,
+2023-06-16 16:08:57 [INFO]             'gemm_to_matmul': True,
+2023-06-16 16:08:57 [INFO]             'graph_optimization_level': None,
+2023-06-16 16:08:57 [INFO]             'first_conv_or_matmul_quantization': True,
+2023-06-16 16:08:57 [INFO]             'last_conv_or_matmul_quantization': True,
+2023-06-16 16:08:57 [INFO]             'pre_post_process_quantization': True,
+2023-06-16 16:08:57 [INFO]             'add_qdq_pair_to_weight': False,
+2023-06-16 16:08:57 [INFO]             'optypes_to_exclude_output_quant': [
+2023-06-16 16:08:57 [INFO]             ],
+2023-06-16 16:08:57 [INFO]             'dedicated_qdq_pair': False
+2023-06-16 16:08:57 [INFO]         },
+2023-06-16 16:08:57 [INFO]         'reduce_range': None,
+2023-06-16 16:08:57 [INFO]         'TuningCriterion': {
+2023-06-16 16:08:57 [INFO]             'max_trials': 100,
+2023-06-16 16:08:57 [INFO]             'objective': 'performance',
+2023-06-16 16:08:57 [INFO]             'strategy': 'basic',
+2023-06-16 16:08:57 [INFO]             'strategy_kwargs': None,
+2023-06-16 16:08:57 [INFO]             'timeout': 0
+2023-06-16 16:08:57 [INFO]         },
+2023-06-16 16:08:57 [INFO]         'use_bf16': True
+2023-06-16 16:08:57 [INFO]     }
+2023-06-16 16:08:57 [INFO] }
+2023-06-16 16:08:57 [WARNING] [Strategy] Please install `mpi4py` correctly if using distributed tuning; otherwise, ignore this warning.
+2023-06-16 16:08:57 [WARNING] Fail to remove /home/rbrugaro/bridge-tower-backend/nc_workspace/2023-06-16_16-08-44/ipex_config_tmp.json.
+2023-06-16 16:08:57 [INFO]  Found 24 blocks
+2023-06-16 16:08:57 [INFO] Attention Blocks: 24
+2023-06-16 16:08:57 [INFO] FFN Blocks: 24
+2023-06-16 16:08:57 [WARNING] Smoothquant for ipex requires a deepcopy of model, please avoid out of memory.
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantize.py:93: UserWarning: BatchNorm folding failed during the prepare process.
+  warnings.warn("BatchNorm folding failed during the prepare process.")
+2023-06-16 16:09:13 [INFO] Attention Blocks : 
+2023-06-16 16:09:13 [INFO] [['bridgetower.text_model.encoder.layer.0.attention.self.query', 'bridgetower.text_model.encoder.layer.0.attention.self.key', 'bridgetower.text_model.encoder.layer.0.attention.self.value', 'bridgetower.text_model.encoder.layer.0.attention.output.dense'], ['bridgetower.text_model.encoder.layer.1.attention.self.query', 'bridgetower.text_model.encoder.layer.1.attention.self.key', 'bridgetower.text_model.encoder.layer.1.attention.self.value', 'bridgetower.text_model.encoder.layer.1.attention.output.dense'], ['bridgetower.text_model.encoder.layer.2.attention.self.query', 'bridgetower.text_model.encoder.layer.2.attention.self.key', 'bridgetower.text_model.encoder.layer.2.attention.self.value', 'bridgetower.text_model.encoder.layer.2.attention.output.dense'], ['bridgetower.text_model.encoder.layer.3.attention.self.query', 'bridgetower.text_model.encoder.layer.3.attention.self.key', 'bridgetower.text_model.encoder.layer.3.attention.self.value', 'bridgetower.text_model.encoder.layer.3.attention.output.dense'], ['bridgetower.text_model.encoder.layer.4.attention.self.query', 'bridgetower.text_model.encoder.layer.4.attention.self.key', 'bridgetower.text_model.encoder.layer.4.attention.self.value', 'bridgetower.text_model.encoder.layer.4.attention.output.dense'], ['bridgetower.text_model.encoder.layer.5.attention.self.query', 'bridgetower.text_model.encoder.layer.5.attention.self.key', 'bridgetower.text_model.encoder.layer.5.attention.self.value', 'bridgetower.text_model.encoder.layer.5.attention.output.dense'], ['bridgetower.text_model.encoder.layer.6.attention.self.query', 'bridgetower.text_model.encoder.layer.6.attention.self.key', 'bridgetower.text_model.encoder.layer.6.attention.self.value', 'bridgetower.text_model.encoder.layer.6.attention.output.dense'], ['bridgetower.text_model.encoder.layer.7.attention.self.query', 'bridgetower.text_model.encoder.layer.7.attention.self.key', 'bridgetower.text_model.encoder.layer.7.attention.self.value', 'bridgetower.text_model.encoder.layer.7.attention.output.dense'], ['bridgetower.text_model.encoder.layer.8.attention.self.query', 'bridgetower.text_model.encoder.layer.8.attention.self.key', 'bridgetower.text_model.encoder.layer.8.attention.self.value', 'bridgetower.text_model.encoder.layer.8.attention.output.dense'], ['bridgetower.text_model.encoder.layer.9.attention.self.query', 'bridgetower.text_model.encoder.layer.9.attention.self.key', 'bridgetower.text_model.encoder.layer.9.attention.self.value', 'bridgetower.text_model.encoder.layer.9.attention.output.dense'], ['bridgetower.text_model.encoder.layer.10.attention.self.query', 'bridgetower.text_model.encoder.layer.10.attention.self.key', 'bridgetower.text_model.encoder.layer.10.attention.self.value', 'bridgetower.text_model.encoder.layer.10.attention.output.dense'], ['bridgetower.text_model.encoder.layer.11.attention.self.query', 'bridgetower.text_model.encoder.layer.11.attention.self.key', 'bridgetower.text_model.encoder.layer.11.attention.self.value', 'bridgetower.text_model.encoder.layer.11.attention.output.dense'], ['bridgetower.text_model.encoder.layer.12.attention.self.query', 'bridgetower.text_model.encoder.layer.12.attention.self.key', 'bridgetower.text_model.encoder.layer.12.attention.self.value', 'bridgetower.text_model.encoder.layer.12.attention.output.dense'], ['bridgetower.text_model.encoder.layer.13.attention.self.query', 'bridgetower.text_model.encoder.layer.13.attention.self.key', 'bridgetower.text_model.encoder.layer.13.attention.self.value', 'bridgetower.text_model.encoder.layer.13.attention.output.dense'], ['bridgetower.text_model.encoder.layer.14.attention.self.query', 'bridgetower.text_model.encoder.layer.14.attention.self.key', 'bridgetower.text_model.encoder.layer.14.attention.self.value', 'bridgetower.text_model.encoder.layer.14.attention.output.dense'], ['bridgetower.text_model.encoder.layer.15.attention.self.query', 'bridgetower.text_model.encoder.layer.15.attention.self.key', 'bridgetower.text_model.encoder.layer.15.attention.self.value', 'bridgetower.text_model.encoder.layer.15.attention.output.dense'], ['bridgetower.text_model.encoder.layer.16.attention.self.query', 'bridgetower.text_model.encoder.layer.16.attention.self.key', 'bridgetower.text_model.encoder.layer.16.attention.self.value', 'bridgetower.text_model.encoder.layer.16.attention.output.dense'], ['bridgetower.text_model.encoder.layer.17.attention.self.query', 'bridgetower.text_model.encoder.layer.17.attention.self.key', 'bridgetower.text_model.encoder.layer.17.attention.self.value', 'bridgetower.text_model.encoder.layer.17.attention.output.dense'], ['bridgetower.text_model.encoder.layer.18.attention.self.query', 'bridgetower.text_model.encoder.layer.18.attention.self.key', 'bridgetower.text_model.encoder.layer.18.attention.self.value', 'bridgetower.text_model.encoder.layer.18.attention.output.dense'], ['bridgetower.text_model.encoder.layer.19.attention.self.query', 'bridgetower.text_model.encoder.layer.19.attention.self.key', 'bridgetower.text_model.encoder.layer.19.attention.self.value', 'bridgetower.text_model.encoder.layer.19.attention.output.dense'], ['bridgetower.text_model.encoder.layer.20.attention.self.query', 'bridgetower.text_model.encoder.layer.20.attention.self.key', 'bridgetower.text_model.encoder.layer.20.attention.self.value', 'bridgetower.text_model.encoder.layer.20.attention.output.dense'], ['bridgetower.text_model.encoder.layer.21.attention.self.query', 'bridgetower.text_model.encoder.layer.21.attention.self.key', 'bridgetower.text_model.encoder.layer.21.attention.self.value', 'bridgetower.text_model.encoder.layer.21.attention.output.dense'], ['bridgetower.text_model.encoder.layer.22.attention.self.query', 'bridgetower.text_model.encoder.layer.22.attention.self.key', 'bridgetower.text_model.encoder.layer.22.attention.self.value', 'bridgetower.text_model.encoder.layer.22.attention.output.dense'], ['bridgetower.text_model.encoder.layer.23.attention.self.query', 'bridgetower.text_model.encoder.layer.23.attention.self.key', 'bridgetower.text_model.encoder.layer.23.attention.self.value', 'bridgetower.text_model.encoder.layer.23.attention.output.dense']]
+2023-06-16 16:09:13 [INFO] FFN Blocks : 
+2023-06-16 16:09:13 [INFO] [['bridgetower.text_model.encoder.layer.0.intermediate.dense', 'bridgetower.text_model.encoder.layer.0.output.dense'], ['bridgetower.text_model.encoder.layer.1.intermediate.dense', 'bridgetower.text_model.encoder.layer.1.output.dense'], ['bridgetower.text_model.encoder.layer.2.intermediate.dense', 'bridgetower.text_model.encoder.layer.2.output.dense'], ['bridgetower.text_model.encoder.layer.3.intermediate.dense', 'bridgetower.text_model.encoder.layer.3.output.dense'], ['bridgetower.text_model.encoder.layer.4.intermediate.dense', 'bridgetower.text_model.encoder.layer.4.output.dense'], ['bridgetower.text_model.encoder.layer.5.intermediate.dense', 'bridgetower.text_model.encoder.layer.5.output.dense'], ['bridgetower.text_model.encoder.layer.6.intermediate.dense', 'bridgetower.text_model.encoder.layer.6.output.dense'], ['bridgetower.text_model.encoder.layer.7.intermediate.dense', 'bridgetower.text_model.encoder.layer.7.output.dense'], ['bridgetower.text_model.encoder.layer.8.intermediate.dense', 'bridgetower.text_model.encoder.layer.8.output.dense'], ['bridgetower.text_model.encoder.layer.9.intermediate.dense', 'bridgetower.text_model.encoder.layer.9.output.dense'], ['bridgetower.text_model.encoder.layer.10.intermediate.dense', 'bridgetower.text_model.encoder.layer.10.output.dense'], ['bridgetower.text_model.encoder.layer.11.intermediate.dense', 'bridgetower.text_model.encoder.layer.11.output.dense'], ['bridgetower.text_model.encoder.layer.12.intermediate.dense', 'bridgetower.text_model.encoder.layer.12.output.dense'], ['bridgetower.text_model.encoder.layer.13.intermediate.dense', 'bridgetower.text_model.encoder.layer.13.output.dense'], ['bridgetower.text_model.encoder.layer.14.intermediate.dense', 'bridgetower.text_model.encoder.layer.14.output.dense'], ['bridgetower.text_model.encoder.layer.15.intermediate.dense', 'bridgetower.text_model.encoder.layer.15.output.dense'], ['bridgetower.text_model.encoder.layer.16.intermediate.dense', 'bridgetower.text_model.encoder.layer.16.output.dense'], ['bridgetower.text_model.encoder.layer.17.intermediate.dense', 'bridgetower.text_model.encoder.layer.17.output.dense'], ['bridgetower.text_model.encoder.layer.18.intermediate.dense', 'bridgetower.text_model.encoder.layer.18.output.dense'], ['bridgetower.text_model.encoder.layer.19.intermediate.dense', 'bridgetower.text_model.encoder.layer.19.output.dense'], ['bridgetower.text_model.encoder.layer.20.intermediate.dense', 'bridgetower.text_model.encoder.layer.20.output.dense'], ['bridgetower.text_model.encoder.layer.21.intermediate.dense', 'bridgetower.text_model.encoder.layer.21.output.dense'], ['bridgetower.text_model.encoder.layer.22.intermediate.dense', 'bridgetower.text_model.encoder.layer.22.output.dense'], ['bridgetower.text_model.encoder.layer.23.intermediate.dense', 'bridgetower.text_model.encoder.layer.23.output.dense']]
+2023-06-16 16:09:13 [INFO] Pass query framework capability elapsed time: 16742.94 ms
+2023-06-16 16:09:14 [INFO] Do not evaluate the baseline and quantize the model with default configuration.
+2023-06-16 16:09:14 [INFO] Quantize the model with default config.
+2023-06-16 16:10:08 [WARNING] The calibration failed when calibrating with ipex, using scale info from SmoothQuant for Linear and one iter calibration for other ops.
+2023-06-16 16:10:19 [WARNING] SmoothQuant folding=False with bf16 may cause accuracy=0! Please consider setting excluded_precisions=['bf16'] in your config.
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state_utils.py:442: TracerWarning: Converting a tensor to a Python number might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  args, scale.item(), zp.item(), dtype
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state.py:452: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if scale.numel() > 1:
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state_utils.py:458: TracerWarning: Converting a tensor to a Python number might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  args, scale.item(), zp.item(), dtype
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state.py:602: TracerWarning: Converting a tensor to a Python number might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  output, scale.item(), zp.item(), inf_dtype
+2023-06-16 16:12:08 [INFO] |******Mixed Precision Statistics******|
+2023-06-16 16:12:08 [INFO] +----------------+-------+------+------+
+2023-06-16 16:12:08 [INFO] |    Op Type     | Total | INT8 | FP32 |
+2023-06-16 16:12:08 [INFO] +----------------+-------+------+------+
+2023-06-16 16:12:08 [INFO] |    add&add     |   10  |  10  |  0   |
+2023-06-16 16:12:08 [INFO] | Linear&add&add |   1   |  1   |  0   |
+2023-06-16 16:12:08 [INFO] |   Linear&add   |   1   |  1   |  0   |
+2023-06-16 16:12:08 [INFO] |    flatten     |   1   |  1   |  0   |
+2023-06-16 16:12:08 [INFO] |     Linear     |  269  | 269  |  0   |
+2023-06-16 16:12:08 [INFO] |      add       |  185  |  0   | 185  |
+2023-06-16 16:12:08 [INFO] |     matmul     |   99  |  0   |  99  |
+2023-06-16 16:12:08 [INFO] |     Conv2d     |   1   |  0   |  1   |
+2023-06-16 16:12:08 [INFO] +----------------+-------+------+------+
+2023-06-16 16:12:08 [INFO] Pass quantize model elapsed time: 146560.01 ms
+2023-06-16 16:12:08 [INFO] Save tuning history to /home/rbrugaro/bridge-tower-backend/nc_workspace/2023-06-16_16-08-44/./history.snapshot.
+2023-06-16 16:12:08 [INFO] Specified timeout or max trials is reached! Found a quantized model which meet accuracy goal. Exit.
+2023-06-16 16:12:08 [INFO] Save deploy yaml to /home/rbrugaro/bridge-tower-backend/nc_workspace/2023-06-16_16-08-44/deploy.yaml
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+STAGE:2023-06-16 16:12:17 2381824:2381824 ActivityProfilerController.cpp:312] Completed Stage: Warm Up
+STAGE:2023-06-16 16:12:44 2381824:2381824 ActivityProfilerController.cpp:318] Completed Stage: Collection
+STAGE:2023-06-16 16:12:44 2381824:2381824 ActivityProfilerController.cpp:322] Completed Stage: Post Processing
+---------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                               Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls  
+---------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                      ProfilerStep*         0.23%      58.012ms       100.00%       25.262s     252.623ms           100  
+                                            forward         6.13%        1.549s        99.77%       25.204s     252.042ms           100  
+                 aten::scaled_dot_product_attention         0.07%      18.754ms        21.00%        5.305s       2.211ms          2400  
+           aten::_scaled_dot_product_attention_math         0.23%      59.158ms        20.93%        5.287s       2.203ms          2400  
+                                       aten::matmul         0.54%     136.229ms        16.57%        4.186s     872.135us          4800  
+                                          aten::bmm        12.42%        3.138s        15.60%        3.942s     821.192us          4800  
+                           ipex_prepack::linear_run        15.00%        3.789s        15.35%        3.877s     421.388us          9200  
+                                        aten::copy_         7.85%        1.983s         7.85%        1.983s      66.999us         29600  
+                                            dil_bmm         7.33%        1.853s         7.39%        1.866s     194.336us          9600  
+                 dequantize+to+dequantize+to+linear         6.40%        1.616s         6.93%        1.751s     115.949us         15100  
+                                   aten::layer_norm         0.50%     125.197ms         6.81%        1.720s     122.021us         14100  
+                             torch_ipex::layer_norm         6.34%        1.602s         6.49%        1.639s     116.265us         14100  
+             dequantize+to+dequantize+to+linear+add         5.67%        1.431s         5.90%        1.491s     156.922us          9500  
+                          aten::quantize_per_tensor         5.72%        1.446s         5.80%        1.464s      62.045us         23600  
+                                   aten::contiguous         0.15%      37.170ms         5.25%        1.325s      77.959us         17000  
+                                        aten::clone         0.61%     153.043ms         5.02%        1.268s     103.910us         12200  
+                                dil_mha_scores_calc         0.14%      35.055ms         4.95%        1.250s     260.470us          4800  
+                                        dil_mha_bmm         0.20%      50.757ms         4.51%        1.139s     237.235us          4800  
+                                           aten::to         0.15%      39.150ms         4.47%        1.130s      45.954us         24600  
+                                     aten::_to_copy         0.73%     184.775ms         4.23%        1.069s      61.463us         17400  
+---------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 25.262s
+
+[W OperatorEntry.cpp:153] Warning: Warning only once for all operators,  other operators may also be overrided.
+  Overriding a previously registered kernel for the same operator and the same dispatch key
+  operator: aten::conv1d(Tensor input, Tensor weight, Tensor? bias=None, int[1] stride=[1], SymInt[1] padding=[0], int[1] dilation=[1], int groups=1) -> Tensor
+    registered at aten/src/ATen/RegisterSchema.cpp:6
+  dispatch key: AutocastCPU
+  previous kernel: registered at ../aten/src/ATen/autocast_mode.cpp:216
+       new kernel: registered at /home/rbrugaro/bridge-tower-backend/frameworks.ai.pytorch.ipex-cpu/csrc/cpu/autocast/autocast_mode.cpp:164 (function operator())
+Namespace(precision='int8', batch_size='16', calib_samples='32')
+Some weights of the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc were not used when initializing BridgeTowerForContrastiveLearning: ['bridgetower.vision_model.visual.conv1.weight', 'mlm_score.transform.dense.bias', 'mlm_score.decoder.weight', 'bridgetower.vision_model.visual.class_embedding', 'itm_score.fc.bias', 'mlm_score.transform.dense.weight', 'mlm_score.transform.LayerNorm.weight', 'mlm_score.transform.LayerNorm.bias', 'bridgetower.vision_model.visual.positional_embedding', 'itm_score.fc.weight', 'mlm_score.bias']
+- This IS expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BridgeTowerForContrastiveLearning were not initialized from the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc and are newly initialized: ['bridgetower.vision_model.visual.embeddings.position_ids', 'logit_scale']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+torch.Size([16, 100])
+2023-06-16 16:14:33 [INFO] Start auto tuning.
+2023-06-16 16:14:33 [INFO] Quantize model without tuning!
+2023-06-16 16:14:33 [INFO] Quantize the model with default configuration without evaluating the model.                To perform the tuning process, please either provide an eval_func or provide an                    eval_dataloader an eval_metric.
+2023-06-16 16:14:33 [INFO] Adaptor has 4 recipes.
+2023-06-16 16:14:33 [INFO] 1 recipes specified by user.
+2023-06-16 16:14:33 [INFO] 3 recipes require future tuning.
+2023-06-16 16:14:33 [INFO] *** Initialize auto tuning
+2023-06-16 16:14:33 [INFO] {
+2023-06-16 16:14:33 [INFO]     'PostTrainingQuantConfig': {
+2023-06-16 16:14:33 [INFO]         'AccuracyCriterion': {
+2023-06-16 16:14:33 [INFO]             'criterion': 'relative',
+2023-06-16 16:14:33 [INFO]             'higher_is_better': True,
+2023-06-16 16:14:33 [INFO]             'tolerable_loss': 0.01,
+2023-06-16 16:14:33 [INFO]             'absolute': None,
+2023-06-16 16:14:33 [INFO]             'keys': <bound method AccuracyCriterion.keys of <neural_compressor.config.AccuracyCriterion object at 0x7fde614f31c0>>,
+2023-06-16 16:14:33 [INFO]             'relative': 0.01
+2023-06-16 16:14:33 [INFO]         },
+2023-06-16 16:14:33 [INFO]         'approach': 'post_training_static_quant',
+2023-06-16 16:14:33 [INFO]         'backend': 'ipex',
+2023-06-16 16:14:33 [INFO]         'calibration_sampling_size': [
+2023-06-16 16:14:33 [INFO]             32
+2023-06-16 16:14:33 [INFO]         ],
+2023-06-16 16:14:33 [INFO]         'device': 'cpu',
+2023-06-16 16:14:33 [INFO]         'diagnosis': False,
+2023-06-16 16:14:33 [INFO]         'domain': 'auto',
+2023-06-16 16:14:33 [INFO]         'example_inputs': None,
+2023-06-16 16:14:33 [INFO]         'excluded_precisions': [
+2023-06-16 16:14:33 [INFO]         ],
+2023-06-16 16:14:33 [INFO]         'framework': 'pytorch_ipex',
+2023-06-16 16:14:33 [INFO]         'inputs': [
+2023-06-16 16:14:33 [INFO]         ],
+2023-06-16 16:14:33 [INFO]         'model_name': '',
+2023-06-16 16:14:33 [INFO]         'op_name_dict': None,
+2023-06-16 16:14:33 [INFO]         'op_type_dict': {
+2023-06-16 16:14:33 [INFO]             'add': {
+2023-06-16 16:14:33 [INFO]                 'weight': {
+2023-06-16 16:14:33 [INFO]                     'dtype': [
+2023-06-16 16:14:33 [INFO]                         'fp32'
+2023-06-16 16:14:33 [INFO]                     ]
+2023-06-16 16:14:33 [INFO]                 },
+2023-06-16 16:14:33 [INFO]                 'activation': {
+2023-06-16 16:14:33 [INFO]                     'dtype': [
+2023-06-16 16:14:33 [INFO]                         'fp32'
+2023-06-16 16:14:33 [INFO]                     ]
+2023-06-16 16:14:33 [INFO]                 }
+2023-06-16 16:14:33 [INFO]             },
+2023-06-16 16:14:33 [INFO]             'linear': {
+2023-06-16 16:14:33 [INFO]                 'weight': {
+2023-06-16 16:14:33 [INFO]                     'dtype': [
+2023-06-16 16:14:33 [INFO]                         'int8'
+2023-06-16 16:14:33 [INFO]                     ],
+2023-06-16 16:14:33 [INFO]                     'scheme': [
+2023-06-16 16:14:33 [INFO]                         'sym'
+2023-06-16 16:14:33 [INFO]                     ],
+2023-06-16 16:14:33 [INFO]                     'granularity': [
+2023-06-16 16:14:33 [INFO]                         'per_channel'
+2023-06-16 16:14:33 [INFO]                     ],
+2023-06-16 16:14:33 [INFO]                     'algorithm': [
+2023-06-16 16:14:33 [INFO]                         'minmax'
+2023-06-16 16:14:33 [INFO]                     ]
+2023-06-16 16:14:33 [INFO]                 },
+2023-06-16 16:14:33 [INFO]                 'activation': {
+2023-06-16 16:14:33 [INFO]                     'dtype': [
+2023-06-16 16:14:33 [INFO]                         'uint8'
+2023-06-16 16:14:33 [INFO]                     ],
+2023-06-16 16:14:33 [INFO]                     'scheme': [
+2023-06-16 16:14:33 [INFO]                         'asym'
+2023-06-16 16:14:33 [INFO]                     ],
+2023-06-16 16:14:33 [INFO]                     'granularity': [
+2023-06-16 16:14:33 [INFO]                         'per_tensor'
+2023-06-16 16:14:33 [INFO]                     ],
+2023-06-16 16:14:33 [INFO]                     'algorithm': [
+2023-06-16 16:14:33 [INFO]                         'minmax'
+2023-06-16 16:14:33 [INFO]                     ]
+2023-06-16 16:14:33 [INFO]                 }
+2023-06-16 16:14:33 [INFO]             },
+2023-06-16 16:14:33 [INFO]             'Conv2d': {
+2023-06-16 16:14:33 [INFO]                 'weight': {
+2023-06-16 16:14:33 [INFO]                     'dtype': [
+2023-06-16 16:14:33 [INFO]                         'fp32'
+2023-06-16 16:14:33 [INFO]                     ]
+2023-06-16 16:14:33 [INFO]                 },
+2023-06-16 16:14:33 [INFO]                 'activation': {
+2023-06-16 16:14:33 [INFO]                     'dtype': [
+2023-06-16 16:14:33 [INFO]                         'fp32'
+2023-06-16 16:14:33 [INFO]                     ]
+2023-06-16 16:14:33 [INFO]                 }
+2023-06-16 16:14:33 [INFO]             },
+2023-06-16 16:14:33 [INFO]             'flatten': {
+2023-06-16 16:14:33 [INFO]                 'weight': {
+2023-06-16 16:14:33 [INFO]                     'dtype': [
+2023-06-16 16:14:33 [INFO]                         'fp32'
+2023-06-16 16:14:33 [INFO]                     ]
+2023-06-16 16:14:33 [INFO]                 },
+2023-06-16 16:14:33 [INFO]                 'activation': {
+2023-06-16 16:14:33 [INFO]                     'dtype': [
+2023-06-16 16:14:33 [INFO]                         'fp32'
+2023-06-16 16:14:33 [INFO]                     ]
+2023-06-16 16:14:33 [INFO]                 }
+2023-06-16 16:14:33 [INFO]             },
+2023-06-16 16:14:33 [INFO]             'matmul': {
+2023-06-16 16:14:33 [INFO]                 'weight': {
+2023-06-16 16:14:33 [INFO]                     'dtype': [
+2023-06-16 16:14:33 [INFO]                         'fp32'
+2023-06-16 16:14:33 [INFO]                     ]
+2023-06-16 16:14:33 [INFO]                 },
+2023-06-16 16:14:33 [INFO]                 'activation': {
+2023-06-16 16:14:33 [INFO]                     'dtype': [
+2023-06-16 16:14:33 [INFO]                         'fp32'
+2023-06-16 16:14:33 [INFO]                     ]
+2023-06-16 16:14:33 [INFO]                 }
+2023-06-16 16:14:33 [INFO]             }
+2023-06-16 16:14:33 [INFO]         },
+2023-06-16 16:14:33 [INFO]         'outputs': [
+2023-06-16 16:14:33 [INFO]         ],
+2023-06-16 16:14:33 [INFO]         'quant_format': 'default',
+2023-06-16 16:14:33 [INFO]         'quant_level': 'auto',
+2023-06-16 16:14:33 [INFO]         'recipes': {
+2023-06-16 16:14:33 [INFO]             'smooth_quant': True,
+2023-06-16 16:14:33 [INFO]             'smooth_quant_args': {
+2023-06-16 16:14:33 [INFO]                 'alpha': 0.5,
+2023-06-16 16:14:33 [INFO]                 'folding': False
+2023-06-16 16:14:33 [INFO]             },
+2023-06-16 16:14:33 [INFO]             'fast_bias_correction': False,
+2023-06-16 16:14:33 [INFO]             'weight_correction': False,
+2023-06-16 16:14:33 [INFO]             'gemm_to_matmul': True,
+2023-06-16 16:14:33 [INFO]             'graph_optimization_level': None,
+2023-06-16 16:14:33 [INFO]             'first_conv_or_matmul_quantization': True,
+2023-06-16 16:14:33 [INFO]             'last_conv_or_matmul_quantization': True,
+2023-06-16 16:14:33 [INFO]             'pre_post_process_quantization': True,
+2023-06-16 16:14:33 [INFO]             'add_qdq_pair_to_weight': False,
+2023-06-16 16:14:33 [INFO]             'optypes_to_exclude_output_quant': [
+2023-06-16 16:14:33 [INFO]             ],
+2023-06-16 16:14:33 [INFO]             'dedicated_qdq_pair': False
+2023-06-16 16:14:33 [INFO]         },
+2023-06-16 16:14:33 [INFO]         'reduce_range': None,
+2023-06-16 16:14:33 [INFO]         'TuningCriterion': {
+2023-06-16 16:14:33 [INFO]             'max_trials': 100,
+2023-06-16 16:14:33 [INFO]             'objective': 'performance',
+2023-06-16 16:14:33 [INFO]             'strategy': 'basic',
+2023-06-16 16:14:33 [INFO]             'strategy_kwargs': None,
+2023-06-16 16:14:33 [INFO]             'timeout': 0
+2023-06-16 16:14:33 [INFO]         },
+2023-06-16 16:14:33 [INFO]         'use_bf16': True
+2023-06-16 16:14:33 [INFO]     }
+2023-06-16 16:14:33 [INFO] }
+2023-06-16 16:14:33 [WARNING] [Strategy] Please install `mpi4py` correctly if using distributed tuning; otherwise, ignore this warning.
+2023-06-16 16:14:34 [WARNING] Fail to remove /home/rbrugaro/bridge-tower-backend/nc_workspace/2023-06-16_16-14-21/ipex_config_tmp.json.
+2023-06-16 16:14:34 [INFO]  Found 24 blocks
+2023-06-16 16:14:34 [INFO] Attention Blocks: 24
+2023-06-16 16:14:34 [INFO] FFN Blocks: 24
+2023-06-16 16:14:34 [WARNING] Smoothquant for ipex requires a deepcopy of model, please avoid out of memory.
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantize.py:93: UserWarning: BatchNorm folding failed during the prepare process.
+  warnings.warn("BatchNorm folding failed during the prepare process.")
+2023-06-16 16:15:06 [INFO] Attention Blocks : 
+2023-06-16 16:15:06 [INFO] [['bridgetower.text_model.encoder.layer.0.attention.self.query', 'bridgetower.text_model.encoder.layer.0.attention.self.key', 'bridgetower.text_model.encoder.layer.0.attention.self.value', 'bridgetower.text_model.encoder.layer.0.attention.output.dense'], ['bridgetower.text_model.encoder.layer.1.attention.self.query', 'bridgetower.text_model.encoder.layer.1.attention.self.key', 'bridgetower.text_model.encoder.layer.1.attention.self.value', 'bridgetower.text_model.encoder.layer.1.attention.output.dense'], ['bridgetower.text_model.encoder.layer.2.attention.self.query', 'bridgetower.text_model.encoder.layer.2.attention.self.key', 'bridgetower.text_model.encoder.layer.2.attention.self.value', 'bridgetower.text_model.encoder.layer.2.attention.output.dense'], ['bridgetower.text_model.encoder.layer.3.attention.self.query', 'bridgetower.text_model.encoder.layer.3.attention.self.key', 'bridgetower.text_model.encoder.layer.3.attention.self.value', 'bridgetower.text_model.encoder.layer.3.attention.output.dense'], ['bridgetower.text_model.encoder.layer.4.attention.self.query', 'bridgetower.text_model.encoder.layer.4.attention.self.key', 'bridgetower.text_model.encoder.layer.4.attention.self.value', 'bridgetower.text_model.encoder.layer.4.attention.output.dense'], ['bridgetower.text_model.encoder.layer.5.attention.self.query', 'bridgetower.text_model.encoder.layer.5.attention.self.key', 'bridgetower.text_model.encoder.layer.5.attention.self.value', 'bridgetower.text_model.encoder.layer.5.attention.output.dense'], ['bridgetower.text_model.encoder.layer.6.attention.self.query', 'bridgetower.text_model.encoder.layer.6.attention.self.key', 'bridgetower.text_model.encoder.layer.6.attention.self.value', 'bridgetower.text_model.encoder.layer.6.attention.output.dense'], ['bridgetower.text_model.encoder.layer.7.attention.self.query', 'bridgetower.text_model.encoder.layer.7.attention.self.key', 'bridgetower.text_model.encoder.layer.7.attention.self.value', 'bridgetower.text_model.encoder.layer.7.attention.output.dense'], ['bridgetower.text_model.encoder.layer.8.attention.self.query', 'bridgetower.text_model.encoder.layer.8.attention.self.key', 'bridgetower.text_model.encoder.layer.8.attention.self.value', 'bridgetower.text_model.encoder.layer.8.attention.output.dense'], ['bridgetower.text_model.encoder.layer.9.attention.self.query', 'bridgetower.text_model.encoder.layer.9.attention.self.key', 'bridgetower.text_model.encoder.layer.9.attention.self.value', 'bridgetower.text_model.encoder.layer.9.attention.output.dense'], ['bridgetower.text_model.encoder.layer.10.attention.self.query', 'bridgetower.text_model.encoder.layer.10.attention.self.key', 'bridgetower.text_model.encoder.layer.10.attention.self.value', 'bridgetower.text_model.encoder.layer.10.attention.output.dense'], ['bridgetower.text_model.encoder.layer.11.attention.self.query', 'bridgetower.text_model.encoder.layer.11.attention.self.key', 'bridgetower.text_model.encoder.layer.11.attention.self.value', 'bridgetower.text_model.encoder.layer.11.attention.output.dense'], ['bridgetower.text_model.encoder.layer.12.attention.self.query', 'bridgetower.text_model.encoder.layer.12.attention.self.key', 'bridgetower.text_model.encoder.layer.12.attention.self.value', 'bridgetower.text_model.encoder.layer.12.attention.output.dense'], ['bridgetower.text_model.encoder.layer.13.attention.self.query', 'bridgetower.text_model.encoder.layer.13.attention.self.key', 'bridgetower.text_model.encoder.layer.13.attention.self.value', 'bridgetower.text_model.encoder.layer.13.attention.output.dense'], ['bridgetower.text_model.encoder.layer.14.attention.self.query', 'bridgetower.text_model.encoder.layer.14.attention.self.key', 'bridgetower.text_model.encoder.layer.14.attention.self.value', 'bridgetower.text_model.encoder.layer.14.attention.output.dense'], ['bridgetower.text_model.encoder.layer.15.attention.self.query', 'bridgetower.text_model.encoder.layer.15.attention.self.key', 'bridgetower.text_model.encoder.layer.15.attention.self.value', 'bridgetower.text_model.encoder.layer.15.attention.output.dense'], ['bridgetower.text_model.encoder.layer.16.attention.self.query', 'bridgetower.text_model.encoder.layer.16.attention.self.key', 'bridgetower.text_model.encoder.layer.16.attention.self.value', 'bridgetower.text_model.encoder.layer.16.attention.output.dense'], ['bridgetower.text_model.encoder.layer.17.attention.self.query', 'bridgetower.text_model.encoder.layer.17.attention.self.key', 'bridgetower.text_model.encoder.layer.17.attention.self.value', 'bridgetower.text_model.encoder.layer.17.attention.output.dense'], ['bridgetower.text_model.encoder.layer.18.attention.self.query', 'bridgetower.text_model.encoder.layer.18.attention.self.key', 'bridgetower.text_model.encoder.layer.18.attention.self.value', 'bridgetower.text_model.encoder.layer.18.attention.output.dense'], ['bridgetower.text_model.encoder.layer.19.attention.self.query', 'bridgetower.text_model.encoder.layer.19.attention.self.key', 'bridgetower.text_model.encoder.layer.19.attention.self.value', 'bridgetower.text_model.encoder.layer.19.attention.output.dense'], ['bridgetower.text_model.encoder.layer.20.attention.self.query', 'bridgetower.text_model.encoder.layer.20.attention.self.key', 'bridgetower.text_model.encoder.layer.20.attention.self.value', 'bridgetower.text_model.encoder.layer.20.attention.output.dense'], ['bridgetower.text_model.encoder.layer.21.attention.self.query', 'bridgetower.text_model.encoder.layer.21.attention.self.key', 'bridgetower.text_model.encoder.layer.21.attention.self.value', 'bridgetower.text_model.encoder.layer.21.attention.output.dense'], ['bridgetower.text_model.encoder.layer.22.attention.self.query', 'bridgetower.text_model.encoder.layer.22.attention.self.key', 'bridgetower.text_model.encoder.layer.22.attention.self.value', 'bridgetower.text_model.encoder.layer.22.attention.output.dense'], ['bridgetower.text_model.encoder.layer.23.attention.self.query', 'bridgetower.text_model.encoder.layer.23.attention.self.key', 'bridgetower.text_model.encoder.layer.23.attention.self.value', 'bridgetower.text_model.encoder.layer.23.attention.output.dense']]
+2023-06-16 16:15:06 [INFO] FFN Blocks : 
+2023-06-16 16:15:06 [INFO] [['bridgetower.text_model.encoder.layer.0.intermediate.dense', 'bridgetower.text_model.encoder.layer.0.output.dense'], ['bridgetower.text_model.encoder.layer.1.intermediate.dense', 'bridgetower.text_model.encoder.layer.1.output.dense'], ['bridgetower.text_model.encoder.layer.2.intermediate.dense', 'bridgetower.text_model.encoder.layer.2.output.dense'], ['bridgetower.text_model.encoder.layer.3.intermediate.dense', 'bridgetower.text_model.encoder.layer.3.output.dense'], ['bridgetower.text_model.encoder.layer.4.intermediate.dense', 'bridgetower.text_model.encoder.layer.4.output.dense'], ['bridgetower.text_model.encoder.layer.5.intermediate.dense', 'bridgetower.text_model.encoder.layer.5.output.dense'], ['bridgetower.text_model.encoder.layer.6.intermediate.dense', 'bridgetower.text_model.encoder.layer.6.output.dense'], ['bridgetower.text_model.encoder.layer.7.intermediate.dense', 'bridgetower.text_model.encoder.layer.7.output.dense'], ['bridgetower.text_model.encoder.layer.8.intermediate.dense', 'bridgetower.text_model.encoder.layer.8.output.dense'], ['bridgetower.text_model.encoder.layer.9.intermediate.dense', 'bridgetower.text_model.encoder.layer.9.output.dense'], ['bridgetower.text_model.encoder.layer.10.intermediate.dense', 'bridgetower.text_model.encoder.layer.10.output.dense'], ['bridgetower.text_model.encoder.layer.11.intermediate.dense', 'bridgetower.text_model.encoder.layer.11.output.dense'], ['bridgetower.text_model.encoder.layer.12.intermediate.dense', 'bridgetower.text_model.encoder.layer.12.output.dense'], ['bridgetower.text_model.encoder.layer.13.intermediate.dense', 'bridgetower.text_model.encoder.layer.13.output.dense'], ['bridgetower.text_model.encoder.layer.14.intermediate.dense', 'bridgetower.text_model.encoder.layer.14.output.dense'], ['bridgetower.text_model.encoder.layer.15.intermediate.dense', 'bridgetower.text_model.encoder.layer.15.output.dense'], ['bridgetower.text_model.encoder.layer.16.intermediate.dense', 'bridgetower.text_model.encoder.layer.16.output.dense'], ['bridgetower.text_model.encoder.layer.17.intermediate.dense', 'bridgetower.text_model.encoder.layer.17.output.dense'], ['bridgetower.text_model.encoder.layer.18.intermediate.dense', 'bridgetower.text_model.encoder.layer.18.output.dense'], ['bridgetower.text_model.encoder.layer.19.intermediate.dense', 'bridgetower.text_model.encoder.layer.19.output.dense'], ['bridgetower.text_model.encoder.layer.20.intermediate.dense', 'bridgetower.text_model.encoder.layer.20.output.dense'], ['bridgetower.text_model.encoder.layer.21.intermediate.dense', 'bridgetower.text_model.encoder.layer.21.output.dense'], ['bridgetower.text_model.encoder.layer.22.intermediate.dense', 'bridgetower.text_model.encoder.layer.22.output.dense'], ['bridgetower.text_model.encoder.layer.23.intermediate.dense', 'bridgetower.text_model.encoder.layer.23.output.dense']]
+2023-06-16 16:15:06 [INFO] Pass query framework capability elapsed time: 32248.86 ms
+2023-06-16 16:15:06 [INFO] Do not evaluate the baseline and quantize the model with default configuration.
+2023-06-16 16:15:06 [INFO] Quantize the model with default config.
+2023-06-16 16:15:50 [WARNING] The calibration failed when calibrating with ipex, using scale info from SmoothQuant for Linear and one iter calibration for other ops.
+2023-06-16 16:16:02 [WARNING] SmoothQuant folding=False with bf16 may cause accuracy=0! Please consider setting excluded_precisions=['bf16'] in your config.
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state_utils.py:442: TracerWarning: Converting a tensor to a Python number might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  args, scale.item(), zp.item(), dtype
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state.py:452: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if scale.numel() > 1:
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state_utils.py:458: TracerWarning: Converting a tensor to a Python number might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  args, scale.item(), zp.item(), dtype
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state.py:602: TracerWarning: Converting a tensor to a Python number might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  output, scale.item(), zp.item(), inf_dtype
+2023-06-16 16:18:00 [INFO] |******Mixed Precision Statistics******|
+2023-06-16 16:18:00 [INFO] +----------------+-------+------+------+
+2023-06-16 16:18:00 [INFO] |    Op Type     | Total | INT8 | FP32 |
+2023-06-16 16:18:00 [INFO] +----------------+-------+------+------+
+2023-06-16 16:18:00 [INFO] |    add&add     |   10  |  10  |  0   |
+2023-06-16 16:18:00 [INFO] | Linear&add&add |   1   |  1   |  0   |
+2023-06-16 16:18:00 [INFO] |   Linear&add   |   1   |  1   |  0   |
+2023-06-16 16:18:00 [INFO] |    flatten     |   1   |  1   |  0   |
+2023-06-16 16:18:00 [INFO] |     Linear     |  269  | 269  |  0   |
+2023-06-16 16:18:00 [INFO] |      add       |  185  |  0   | 185  |
+2023-06-16 16:18:00 [INFO] |     matmul     |   99  |  0   |  99  |
+2023-06-16 16:18:00 [INFO] |     Conv2d     |   1   |  0   |  1   |
+2023-06-16 16:18:00 [INFO] +----------------+-------+------+------+
+2023-06-16 16:18:00 [INFO] Pass quantize model elapsed time: 161181.45 ms
+2023-06-16 16:18:00 [INFO] Save tuning history to /home/rbrugaro/bridge-tower-backend/nc_workspace/2023-06-16_16-14-21/./history.snapshot.
+2023-06-16 16:18:00 [INFO] Specified timeout or max trials is reached! Found a quantized model which meet accuracy goal. Exit.
+2023-06-16 16:18:00 [INFO] Save deploy yaml to /home/rbrugaro/bridge-tower-backend/nc_workspace/2023-06-16_16-14-21/deploy.yaml
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+STAGE:2023-06-16 16:18:37 2384021:2384021 ActivityProfilerController.cpp:312] Completed Stage: Warm Up
+STAGE:2023-06-16 16:20:51 2384021:2384021 ActivityProfilerController.cpp:318] Completed Stage: Collection
+STAGE:2023-06-16 16:20:52 2384021:2384021 ActivityProfilerController.cpp:322] Completed Stage: Post Processing
+---------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                               Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls  
+---------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                      ProfilerStep*         0.04%      58.435ms       100.00%      132.580s        1.326s           100  
+                                            forward         3.39%        4.492s        99.96%      132.521s        1.325s           100  
+                 aten::scaled_dot_product_attention         1.29%        1.708s        14.86%       19.707s       8.211ms          2400  
+           aten::_scaled_dot_product_attention_math         0.92%        1.220s        13.58%       17.999s       7.500ms          2400  
+                  fused_to_mul_to_mul_to_mul_to_mul        13.36%       17.714s        13.36%       17.714s      35.428ms           500  
+                           ipex_prepack::linear_run        11.59%       15.361s        11.79%       15.631s       1.699ms          9200  
+                                        aten::copy_         9.54%       12.645s         9.54%       12.645s     366.514us         34500  
+                                   aten::contiguous         0.48%     641.072ms         7.98%       10.579s     487.520us         21700  
+                                       aten::matmul         0.14%     184.334ms         7.77%       10.303s       2.146ms          4800  
+                                fused_to_mul_to_mul         7.63%       10.112s         7.63%       10.112s       8.427ms          1200  
+                                          aten::bmm         5.22%        6.927s         7.51%        9.961s       2.075ms          4800  
+                                        aten::clone         0.34%     453.287ms         7.46%        9.885s     578.050us         17100  
+                                   aten::layer_norm         0.11%     140.644ms         6.97%        9.243s     650.947us         14200  
+                             torch_ipex::layer_norm         4.12%        5.466s         6.90%        9.144s     643.929us         14200  
+                fused_to_mul_mul_mul_mul_mul_to_mul         5.88%        7.798s         5.88%        7.798s      12.996ms           600  
+                                dil_mha_scores_calc         0.29%     389.117ms         4.30%        5.697s       1.187ms          4800  
+                                      aten::softmax         0.01%      17.149ms         3.94%        5.222s       2.176ms          2400  
+                                     aten::_softmax         3.93%        5.206s         3.93%        5.206s       2.169ms          2400  
+                          aten::quantize_per_tensor         3.89%        5.153s         3.91%        5.189s     219.864us         23600  
+                                            dil_bmm         3.73%        4.944s         3.76%        4.982s     518.932us          9600  
+---------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 132.580s
+
+[W OperatorEntry.cpp:153] Warning: Warning only once for all operators,  other operators may also be overrided.
+  Overriding a previously registered kernel for the same operator and the same dispatch key
+  operator: aten::conv1d(Tensor input, Tensor weight, Tensor? bias=None, int[1] stride=[1], SymInt[1] padding=[0], int[1] dilation=[1], int groups=1) -> Tensor
+    registered at aten/src/ATen/RegisterSchema.cpp:6
+  dispatch key: AutocastCPU
+  previous kernel: registered at ../aten/src/ATen/autocast_mode.cpp:216
+       new kernel: registered at /home/rbrugaro/bridge-tower-backend/frameworks.ai.pytorch.ipex-cpu/csrc/cpu/autocast/autocast_mode.cpp:164 (function operator())
+Namespace(precision='int8', batch_size='32', calib_samples='32')
+Some weights of the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc were not used when initializing BridgeTowerForContrastiveLearning: ['bridgetower.vision_model.visual.positional_embedding', 'mlm_score.bias', 'bridgetower.vision_model.visual.conv1.weight', 'itm_score.fc.weight', 'mlm_score.transform.LayerNorm.bias', 'bridgetower.vision_model.visual.class_embedding', 'mlm_score.transform.dense.weight', 'mlm_score.decoder.weight', 'itm_score.fc.bias', 'mlm_score.transform.LayerNorm.weight', 'mlm_score.transform.dense.bias']
+- This IS expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BridgeTowerForContrastiveLearning were not initialized from the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc and are newly initialized: ['bridgetower.vision_model.visual.embeddings.position_ids', 'logit_scale']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+torch.Size([32, 100])
+2023-06-16 16:22:51 [INFO] Start auto tuning.
+2023-06-16 16:22:51 [INFO] Quantize model without tuning!
+2023-06-16 16:22:51 [INFO] Quantize the model with default configuration without evaluating the model.                To perform the tuning process, please either provide an eval_func or provide an                    eval_dataloader an eval_metric.
+2023-06-16 16:22:51 [INFO] Adaptor has 4 recipes.
+2023-06-16 16:22:51 [INFO] 1 recipes specified by user.
+2023-06-16 16:22:51 [INFO] 3 recipes require future tuning.
+2023-06-16 16:22:51 [INFO] *** Initialize auto tuning
+2023-06-16 16:22:51 [INFO] {
+2023-06-16 16:22:51 [INFO]     'PostTrainingQuantConfig': {
+2023-06-16 16:22:51 [INFO]         'AccuracyCriterion': {
+2023-06-16 16:22:51 [INFO]             'criterion': 'relative',
+2023-06-16 16:22:51 [INFO]             'higher_is_better': True,
+2023-06-16 16:22:51 [INFO]             'tolerable_loss': 0.01,
+2023-06-16 16:22:51 [INFO]             'absolute': None,
+2023-06-16 16:22:51 [INFO]             'keys': <bound method AccuracyCriterion.keys of <neural_compressor.config.AccuracyCriterion object at 0x7ff89fbf7190>>,
+2023-06-16 16:22:51 [INFO]             'relative': 0.01
+2023-06-16 16:22:51 [INFO]         },
+2023-06-16 16:22:51 [INFO]         'approach': 'post_training_static_quant',
+2023-06-16 16:22:51 [INFO]         'backend': 'ipex',
+2023-06-16 16:22:51 [INFO]         'calibration_sampling_size': [
+2023-06-16 16:22:51 [INFO]             32
+2023-06-16 16:22:51 [INFO]         ],
+2023-06-16 16:22:51 [INFO]         'device': 'cpu',
+2023-06-16 16:22:51 [INFO]         'diagnosis': False,
+2023-06-16 16:22:51 [INFO]         'domain': 'auto',
+2023-06-16 16:22:51 [INFO]         'example_inputs': None,
+2023-06-16 16:22:51 [INFO]         'excluded_precisions': [
+2023-06-16 16:22:51 [INFO]         ],
+2023-06-16 16:22:51 [INFO]         'framework': 'pytorch_ipex',
+2023-06-16 16:22:51 [INFO]         'inputs': [
+2023-06-16 16:22:51 [INFO]         ],
+2023-06-16 16:22:51 [INFO]         'model_name': '',
+2023-06-16 16:22:51 [INFO]         'op_name_dict': None,
+2023-06-16 16:22:51 [INFO]         'op_type_dict': {
+2023-06-16 16:22:51 [INFO]             'add': {
+2023-06-16 16:22:51 [INFO]                 'weight': {
+2023-06-16 16:22:51 [INFO]                     'dtype': [
+2023-06-16 16:22:51 [INFO]                         'fp32'
+2023-06-16 16:22:51 [INFO]                     ]
+2023-06-16 16:22:51 [INFO]                 },
+2023-06-16 16:22:51 [INFO]                 'activation': {
+2023-06-16 16:22:51 [INFO]                     'dtype': [
+2023-06-16 16:22:51 [INFO]                         'fp32'
+2023-06-16 16:22:51 [INFO]                     ]
+2023-06-16 16:22:51 [INFO]                 }
+2023-06-16 16:22:51 [INFO]             },
+2023-06-16 16:22:51 [INFO]             'linear': {
+2023-06-16 16:22:51 [INFO]                 'weight': {
+2023-06-16 16:22:51 [INFO]                     'dtype': [
+2023-06-16 16:22:51 [INFO]                         'int8'
+2023-06-16 16:22:51 [INFO]                     ],
+2023-06-16 16:22:51 [INFO]                     'scheme': [
+2023-06-16 16:22:51 [INFO]                         'sym'
+2023-06-16 16:22:51 [INFO]                     ],
+2023-06-16 16:22:51 [INFO]                     'granularity': [
+2023-06-16 16:22:51 [INFO]                         'per_channel'
+2023-06-16 16:22:51 [INFO]                     ],
+2023-06-16 16:22:51 [INFO]                     'algorithm': [
+2023-06-16 16:22:51 [INFO]                         'minmax'
+2023-06-16 16:22:51 [INFO]                     ]
+2023-06-16 16:22:51 [INFO]                 },
+2023-06-16 16:22:51 [INFO]                 'activation': {
+2023-06-16 16:22:51 [INFO]                     'dtype': [
+2023-06-16 16:22:51 [INFO]                         'uint8'
+2023-06-16 16:22:51 [INFO]                     ],
+2023-06-16 16:22:51 [INFO]                     'scheme': [
+2023-06-16 16:22:51 [INFO]                         'asym'
+2023-06-16 16:22:51 [INFO]                     ],
+2023-06-16 16:22:51 [INFO]                     'granularity': [
+2023-06-16 16:22:51 [INFO]                         'per_tensor'
+2023-06-16 16:22:51 [INFO]                     ],
+2023-06-16 16:22:51 [INFO]                     'algorithm': [
+2023-06-16 16:22:51 [INFO]                         'minmax'
+2023-06-16 16:22:51 [INFO]                     ]
+2023-06-16 16:22:51 [INFO]                 }
+2023-06-16 16:22:51 [INFO]             },
+2023-06-16 16:22:51 [INFO]             'Conv2d': {
+2023-06-16 16:22:51 [INFO]                 'weight': {
+2023-06-16 16:22:51 [INFO]                     'dtype': [
+2023-06-16 16:22:51 [INFO]                         'fp32'
+2023-06-16 16:22:51 [INFO]                     ]
+2023-06-16 16:22:51 [INFO]                 },
+2023-06-16 16:22:51 [INFO]                 'activation': {
+2023-06-16 16:22:51 [INFO]                     'dtype': [
+2023-06-16 16:22:51 [INFO]                         'fp32'
+2023-06-16 16:22:51 [INFO]                     ]
+2023-06-16 16:22:51 [INFO]                 }
+2023-06-16 16:22:51 [INFO]             },
+2023-06-16 16:22:51 [INFO]             'flatten': {
+2023-06-16 16:22:51 [INFO]                 'weight': {
+2023-06-16 16:22:51 [INFO]                     'dtype': [
+2023-06-16 16:22:51 [INFO]                         'fp32'
+2023-06-16 16:22:51 [INFO]                     ]
+2023-06-16 16:22:51 [INFO]                 },
+2023-06-16 16:22:51 [INFO]                 'activation': {
+2023-06-16 16:22:51 [INFO]                     'dtype': [
+2023-06-16 16:22:51 [INFO]                         'fp32'
+2023-06-16 16:22:51 [INFO]                     ]
+2023-06-16 16:22:51 [INFO]                 }
+2023-06-16 16:22:51 [INFO]             },
+2023-06-16 16:22:51 [INFO]             'matmul': {
+2023-06-16 16:22:51 [INFO]                 'weight': {
+2023-06-16 16:22:51 [INFO]                     'dtype': [
+2023-06-16 16:22:51 [INFO]                         'fp32'
+2023-06-16 16:22:51 [INFO]                     ]
+2023-06-16 16:22:51 [INFO]                 },
+2023-06-16 16:22:51 [INFO]                 'activation': {
+2023-06-16 16:22:51 [INFO]                     'dtype': [
+2023-06-16 16:22:51 [INFO]                         'fp32'
+2023-06-16 16:22:51 [INFO]                     ]
+2023-06-16 16:22:51 [INFO]                 }
+2023-06-16 16:22:51 [INFO]             }
+2023-06-16 16:22:51 [INFO]         },
+2023-06-16 16:22:51 [INFO]         'outputs': [
+2023-06-16 16:22:51 [INFO]         ],
+2023-06-16 16:22:51 [INFO]         'quant_format': 'default',
+2023-06-16 16:22:51 [INFO]         'quant_level': 'auto',
+2023-06-16 16:22:51 [INFO]         'recipes': {
+2023-06-16 16:22:51 [INFO]             'smooth_quant': True,
+2023-06-16 16:22:51 [INFO]             'smooth_quant_args': {
+2023-06-16 16:22:51 [INFO]                 'alpha': 0.5,
+2023-06-16 16:22:51 [INFO]                 'folding': False
+2023-06-16 16:22:51 [INFO]             },
+2023-06-16 16:22:51 [INFO]             'fast_bias_correction': False,
+2023-06-16 16:22:51 [INFO]             'weight_correction': False,
+2023-06-16 16:22:51 [INFO]             'gemm_to_matmul': True,
+2023-06-16 16:22:51 [INFO]             'graph_optimization_level': None,
+2023-06-16 16:22:51 [INFO]             'first_conv_or_matmul_quantization': True,
+2023-06-16 16:22:51 [INFO]             'last_conv_or_matmul_quantization': True,
+2023-06-16 16:22:51 [INFO]             'pre_post_process_quantization': True,
+2023-06-16 16:22:51 [INFO]             'add_qdq_pair_to_weight': False,
+2023-06-16 16:22:51 [INFO]             'optypes_to_exclude_output_quant': [
+2023-06-16 16:22:51 [INFO]             ],
+2023-06-16 16:22:51 [INFO]             'dedicated_qdq_pair': False
+2023-06-16 16:22:51 [INFO]         },
+2023-06-16 16:22:51 [INFO]         'reduce_range': None,
+2023-06-16 16:22:51 [INFO]         'TuningCriterion': {
+2023-06-16 16:22:51 [INFO]             'max_trials': 100,
+2023-06-16 16:22:51 [INFO]             'objective': 'performance',
+2023-06-16 16:22:51 [INFO]             'strategy': 'basic',
+2023-06-16 16:22:51 [INFO]             'strategy_kwargs': None,
+2023-06-16 16:22:51 [INFO]             'timeout': 0
+2023-06-16 16:22:51 [INFO]         },
+2023-06-16 16:22:51 [INFO]         'use_bf16': True
+2023-06-16 16:22:51 [INFO]     }
+2023-06-16 16:22:51 [INFO] }
+2023-06-16 16:22:51 [WARNING] [Strategy] Please install `mpi4py` correctly if using distributed tuning; otherwise, ignore this warning.
+2023-06-16 16:22:51 [WARNING] Fail to remove /home/rbrugaro/bridge-tower-backend/nc_workspace/2023-06-16_16-22-38/ipex_config_tmp.json.
+2023-06-16 16:22:51 [INFO]  Found 24 blocks
+2023-06-16 16:22:51 [INFO] Attention Blocks: 24
+2023-06-16 16:22:51 [INFO] FFN Blocks: 24
+2023-06-16 16:22:51 [WARNING] Smoothquant for ipex requires a deepcopy of model, please avoid out of memory.
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantize.py:93: UserWarning: BatchNorm folding failed during the prepare process.
+  warnings.warn("BatchNorm folding failed during the prepare process.")
+2023-06-16 16:23:32 [INFO] Attention Blocks : 
+2023-06-16 16:23:32 [INFO] [['bridgetower.text_model.encoder.layer.0.attention.self.query', 'bridgetower.text_model.encoder.layer.0.attention.self.key', 'bridgetower.text_model.encoder.layer.0.attention.self.value', 'bridgetower.text_model.encoder.layer.0.attention.output.dense'], ['bridgetower.text_model.encoder.layer.1.attention.self.query', 'bridgetower.text_model.encoder.layer.1.attention.self.key', 'bridgetower.text_model.encoder.layer.1.attention.self.value', 'bridgetower.text_model.encoder.layer.1.attention.output.dense'], ['bridgetower.text_model.encoder.layer.2.attention.self.query', 'bridgetower.text_model.encoder.layer.2.attention.self.key', 'bridgetower.text_model.encoder.layer.2.attention.self.value', 'bridgetower.text_model.encoder.layer.2.attention.output.dense'], ['bridgetower.text_model.encoder.layer.3.attention.self.query', 'bridgetower.text_model.encoder.layer.3.attention.self.key', 'bridgetower.text_model.encoder.layer.3.attention.self.value', 'bridgetower.text_model.encoder.layer.3.attention.output.dense'], ['bridgetower.text_model.encoder.layer.4.attention.self.query', 'bridgetower.text_model.encoder.layer.4.attention.self.key', 'bridgetower.text_model.encoder.layer.4.attention.self.value', 'bridgetower.text_model.encoder.layer.4.attention.output.dense'], ['bridgetower.text_model.encoder.layer.5.attention.self.query', 'bridgetower.text_model.encoder.layer.5.attention.self.key', 'bridgetower.text_model.encoder.layer.5.attention.self.value', 'bridgetower.text_model.encoder.layer.5.attention.output.dense'], ['bridgetower.text_model.encoder.layer.6.attention.self.query', 'bridgetower.text_model.encoder.layer.6.attention.self.key', 'bridgetower.text_model.encoder.layer.6.attention.self.value', 'bridgetower.text_model.encoder.layer.6.attention.output.dense'], ['bridgetower.text_model.encoder.layer.7.attention.self.query', 'bridgetower.text_model.encoder.layer.7.attention.self.key', 'bridgetower.text_model.encoder.layer.7.attention.self.value', 'bridgetower.text_model.encoder.layer.7.attention.output.dense'], ['bridgetower.text_model.encoder.layer.8.attention.self.query', 'bridgetower.text_model.encoder.layer.8.attention.self.key', 'bridgetower.text_model.encoder.layer.8.attention.self.value', 'bridgetower.text_model.encoder.layer.8.attention.output.dense'], ['bridgetower.text_model.encoder.layer.9.attention.self.query', 'bridgetower.text_model.encoder.layer.9.attention.self.key', 'bridgetower.text_model.encoder.layer.9.attention.self.value', 'bridgetower.text_model.encoder.layer.9.attention.output.dense'], ['bridgetower.text_model.encoder.layer.10.attention.self.query', 'bridgetower.text_model.encoder.layer.10.attention.self.key', 'bridgetower.text_model.encoder.layer.10.attention.self.value', 'bridgetower.text_model.encoder.layer.10.attention.output.dense'], ['bridgetower.text_model.encoder.layer.11.attention.self.query', 'bridgetower.text_model.encoder.layer.11.attention.self.key', 'bridgetower.text_model.encoder.layer.11.attention.self.value', 'bridgetower.text_model.encoder.layer.11.attention.output.dense'], ['bridgetower.text_model.encoder.layer.12.attention.self.query', 'bridgetower.text_model.encoder.layer.12.attention.self.key', 'bridgetower.text_model.encoder.layer.12.attention.self.value', 'bridgetower.text_model.encoder.layer.12.attention.output.dense'], ['bridgetower.text_model.encoder.layer.13.attention.self.query', 'bridgetower.text_model.encoder.layer.13.attention.self.key', 'bridgetower.text_model.encoder.layer.13.attention.self.value', 'bridgetower.text_model.encoder.layer.13.attention.output.dense'], ['bridgetower.text_model.encoder.layer.14.attention.self.query', 'bridgetower.text_model.encoder.layer.14.attention.self.key', 'bridgetower.text_model.encoder.layer.14.attention.self.value', 'bridgetower.text_model.encoder.layer.14.attention.output.dense'], ['bridgetower.text_model.encoder.layer.15.attention.self.query', 'bridgetower.text_model.encoder.layer.15.attention.self.key', 'bridgetower.text_model.encoder.layer.15.attention.self.value', 'bridgetower.text_model.encoder.layer.15.attention.output.dense'], ['bridgetower.text_model.encoder.layer.16.attention.self.query', 'bridgetower.text_model.encoder.layer.16.attention.self.key', 'bridgetower.text_model.encoder.layer.16.attention.self.value', 'bridgetower.text_model.encoder.layer.16.attention.output.dense'], ['bridgetower.text_model.encoder.layer.17.attention.self.query', 'bridgetower.text_model.encoder.layer.17.attention.self.key', 'bridgetower.text_model.encoder.layer.17.attention.self.value', 'bridgetower.text_model.encoder.layer.17.attention.output.dense'], ['bridgetower.text_model.encoder.layer.18.attention.self.query', 'bridgetower.text_model.encoder.layer.18.attention.self.key', 'bridgetower.text_model.encoder.layer.18.attention.self.value', 'bridgetower.text_model.encoder.layer.18.attention.output.dense'], ['bridgetower.text_model.encoder.layer.19.attention.self.query', 'bridgetower.text_model.encoder.layer.19.attention.self.key', 'bridgetower.text_model.encoder.layer.19.attention.self.value', 'bridgetower.text_model.encoder.layer.19.attention.output.dense'], ['bridgetower.text_model.encoder.layer.20.attention.self.query', 'bridgetower.text_model.encoder.layer.20.attention.self.key', 'bridgetower.text_model.encoder.layer.20.attention.self.value', 'bridgetower.text_model.encoder.layer.20.attention.output.dense'], ['bridgetower.text_model.encoder.layer.21.attention.self.query', 'bridgetower.text_model.encoder.layer.21.attention.self.key', 'bridgetower.text_model.encoder.layer.21.attention.self.value', 'bridgetower.text_model.encoder.layer.21.attention.output.dense'], ['bridgetower.text_model.encoder.layer.22.attention.self.query', 'bridgetower.text_model.encoder.layer.22.attention.self.key', 'bridgetower.text_model.encoder.layer.22.attention.self.value', 'bridgetower.text_model.encoder.layer.22.attention.output.dense'], ['bridgetower.text_model.encoder.layer.23.attention.self.query', 'bridgetower.text_model.encoder.layer.23.attention.self.key', 'bridgetower.text_model.encoder.layer.23.attention.self.value', 'bridgetower.text_model.encoder.layer.23.attention.output.dense']]
+2023-06-16 16:23:32 [INFO] FFN Blocks : 
+2023-06-16 16:23:32 [INFO] [['bridgetower.text_model.encoder.layer.0.intermediate.dense', 'bridgetower.text_model.encoder.layer.0.output.dense'], ['bridgetower.text_model.encoder.layer.1.intermediate.dense', 'bridgetower.text_model.encoder.layer.1.output.dense'], ['bridgetower.text_model.encoder.layer.2.intermediate.dense', 'bridgetower.text_model.encoder.layer.2.output.dense'], ['bridgetower.text_model.encoder.layer.3.intermediate.dense', 'bridgetower.text_model.encoder.layer.3.output.dense'], ['bridgetower.text_model.encoder.layer.4.intermediate.dense', 'bridgetower.text_model.encoder.layer.4.output.dense'], ['bridgetower.text_model.encoder.layer.5.intermediate.dense', 'bridgetower.text_model.encoder.layer.5.output.dense'], ['bridgetower.text_model.encoder.layer.6.intermediate.dense', 'bridgetower.text_model.encoder.layer.6.output.dense'], ['bridgetower.text_model.encoder.layer.7.intermediate.dense', 'bridgetower.text_model.encoder.layer.7.output.dense'], ['bridgetower.text_model.encoder.layer.8.intermediate.dense', 'bridgetower.text_model.encoder.layer.8.output.dense'], ['bridgetower.text_model.encoder.layer.9.intermediate.dense', 'bridgetower.text_model.encoder.layer.9.output.dense'], ['bridgetower.text_model.encoder.layer.10.intermediate.dense', 'bridgetower.text_model.encoder.layer.10.output.dense'], ['bridgetower.text_model.encoder.layer.11.intermediate.dense', 'bridgetower.text_model.encoder.layer.11.output.dense'], ['bridgetower.text_model.encoder.layer.12.intermediate.dense', 'bridgetower.text_model.encoder.layer.12.output.dense'], ['bridgetower.text_model.encoder.layer.13.intermediate.dense', 'bridgetower.text_model.encoder.layer.13.output.dense'], ['bridgetower.text_model.encoder.layer.14.intermediate.dense', 'bridgetower.text_model.encoder.layer.14.output.dense'], ['bridgetower.text_model.encoder.layer.15.intermediate.dense', 'bridgetower.text_model.encoder.layer.15.output.dense'], ['bridgetower.text_model.encoder.layer.16.intermediate.dense', 'bridgetower.text_model.encoder.layer.16.output.dense'], ['bridgetower.text_model.encoder.layer.17.intermediate.dense', 'bridgetower.text_model.encoder.layer.17.output.dense'], ['bridgetower.text_model.encoder.layer.18.intermediate.dense', 'bridgetower.text_model.encoder.layer.18.output.dense'], ['bridgetower.text_model.encoder.layer.19.intermediate.dense', 'bridgetower.text_model.encoder.layer.19.output.dense'], ['bridgetower.text_model.encoder.layer.20.intermediate.dense', 'bridgetower.text_model.encoder.layer.20.output.dense'], ['bridgetower.text_model.encoder.layer.21.intermediate.dense', 'bridgetower.text_model.encoder.layer.21.output.dense'], ['bridgetower.text_model.encoder.layer.22.intermediate.dense', 'bridgetower.text_model.encoder.layer.22.output.dense'], ['bridgetower.text_model.encoder.layer.23.intermediate.dense', 'bridgetower.text_model.encoder.layer.23.output.dense']]
+2023-06-16 16:23:32 [INFO] Pass query framework capability elapsed time: 41236.57 ms
+2023-06-16 16:23:32 [INFO] Do not evaluate the baseline and quantize the model with default configuration.
+2023-06-16 16:23:32 [INFO] Quantize the model with default config.
+2023-06-16 16:24:26 [WARNING] The calibration failed when calibrating with ipex, using scale info from SmoothQuant for Linear and one iter calibration for other ops.
+2023-06-16 16:24:38 [WARNING] SmoothQuant folding=False with bf16 may cause accuracy=0! Please consider setting excluded_precisions=['bf16'] in your config.
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state_utils.py:442: TracerWarning: Converting a tensor to a Python number might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  args, scale.item(), zp.item(), dtype
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state.py:452: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if scale.numel() > 1:
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state_utils.py:458: TracerWarning: Converting a tensor to a Python number might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  args, scale.item(), zp.item(), dtype
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state.py:602: TracerWarning: Converting a tensor to a Python number might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  output, scale.item(), zp.item(), inf_dtype
+2023-06-16 16:26:48 [INFO] |******Mixed Precision Statistics******|
+2023-06-16 16:26:48 [INFO] +----------------+-------+------+------+
+2023-06-16 16:26:48 [INFO] |    Op Type     | Total | INT8 | FP32 |
+2023-06-16 16:26:48 [INFO] +----------------+-------+------+------+
+2023-06-16 16:26:48 [INFO] |    add&add     |   10  |  10  |  0   |
+2023-06-16 16:26:48 [INFO] | Linear&add&add |   1   |  1   |  0   |
+2023-06-16 16:26:48 [INFO] |   Linear&add   |   1   |  1   |  0   |
+2023-06-16 16:26:48 [INFO] |    flatten     |   1   |  1   |  0   |
+2023-06-16 16:26:48 [INFO] |     Linear     |  269  | 269  |  0   |
+2023-06-16 16:26:48 [INFO] |      add       |  185  |  0   | 185  |
+2023-06-16 16:26:48 [INFO] |     matmul     |   99  |  0   |  99  |
+2023-06-16 16:26:48 [INFO] |     Conv2d     |   1   |  0   |  1   |
+2023-06-16 16:26:48 [INFO] +----------------+-------+------+------+
+2023-06-16 16:26:48 [INFO] Pass quantize model elapsed time: 181294.92 ms
+2023-06-16 16:26:48 [INFO] Save tuning history to /home/rbrugaro/bridge-tower-backend/nc_workspace/2023-06-16_16-22-38/./history.snapshot.
+2023-06-16 16:26:48 [INFO] Specified timeout or max trials is reached! Found a quantized model which meet accuracy goal. Exit.
+2023-06-16 16:26:48 [INFO] Save deploy yaml to /home/rbrugaro/bridge-tower-backend/nc_workspace/2023-06-16_16-22-38/deploy.yaml
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+STAGE:2023-06-16 16:28:21 2384713:2384713 ActivityProfilerController.cpp:312] Completed Stage: Warm Up
+STAGE:2023-06-16 16:32:45 2384713:2384713 ActivityProfilerController.cpp:318] Completed Stage: Collection
+STAGE:2023-06-16 16:32:45 2384713:2384713 ActivityProfilerController.cpp:322] Completed Stage: Post Processing
+---------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                               Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls  
+---------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                      ProfilerStep*         0.32%     847.601ms       100.00%      261.635s        2.616s           100  
+                                            forward         3.15%        8.229s        99.68%      260.788s        2.608s           100  
+                 aten::scaled_dot_product_attention         1.29%        3.383s        14.50%       37.950s      15.812ms          2400  
+                  fused_to_mul_to_mul_to_mul_to_mul        13.44%       35.161s        13.44%       35.161s      70.322ms           500  
+           aten::_scaled_dot_product_attention_math         0.80%        2.097s        13.21%       34.567s      14.403ms          2400  
+                                fused_to_mul_to_mul        10.77%       28.165s        10.77%       28.165s      23.471ms          1200  
+                                        aten::copy_        10.11%       26.442s        10.11%       26.442s     766.444us         34500  
+                           ipex_prepack::linear_run         9.08%       23.755s         9.30%       24.329s       2.644ms          9200  
+                                   aten::contiguous         0.54%        1.410s         8.36%       21.876s       1.008ms         21700  
+                                        aten::clone         0.27%     711.907ms         7.88%       20.623s       1.206ms         17100  
+                                       aten::matmul         0.12%     320.886ms         7.67%       20.058s       4.179ms          4800  
+                                          aten::bmm         4.23%       11.075s         7.46%       19.514s       4.066ms          4800  
+                                   aten::layer_norm         0.06%     148.378ms         7.01%       18.329s       1.291ms         14200  
+                             torch_ipex::layer_norm         4.41%       11.548s         6.96%       18.198s       1.282ms         14200  
+                fused_to_mul_mul_mul_mul_mul_to_mul         6.21%       16.236s         6.21%       16.236s      27.061ms           600  
+                          aten::quantize_per_tensor         4.27%       11.173s         4.31%       11.264s     477.277us         23600  
+                                dil_mha_scores_calc         0.32%     826.863ms         4.08%       10.685s       2.226ms          4800  
+                                      aten::softmax         0.01%      21.226ms         3.62%        9.463s       3.943ms          2400  
+                                     aten::_softmax         3.61%        9.442s         3.61%        9.442s       3.934ms          2400  
+                 dequantize+to+dequantize+to+linear         3.46%        9.063s         3.60%        9.413s     623.397us         15100  
+---------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 261.635s
+
+[W OperatorEntry.cpp:153] Warning: Warning only once for all operators,  other operators may also be overrided.
+  Overriding a previously registered kernel for the same operator and the same dispatch key
+  operator: aten::conv1d(Tensor input, Tensor weight, Tensor? bias=None, int[1] stride=[1], SymInt[1] padding=[0], int[1] dilation=[1], int groups=1) -> Tensor
+    registered at aten/src/ATen/RegisterSchema.cpp:6
+  dispatch key: AutocastCPU
+  previous kernel: registered at ../aten/src/ATen/autocast_mode.cpp:216
+       new kernel: registered at /home/rbrugaro/bridge-tower-backend/frameworks.ai.pytorch.ipex-cpu/csrc/cpu/autocast/autocast_mode.cpp:164 (function operator())
+Namespace(precision='int8', batch_size='64', calib_samples='64')
+Some weights of the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc were not used when initializing BridgeTowerForContrastiveLearning: ['mlm_score.decoder.weight', 'bridgetower.vision_model.visual.positional_embedding', 'itm_score.fc.weight', 'mlm_score.bias', 'itm_score.fc.bias', 'mlm_score.transform.LayerNorm.weight', 'mlm_score.transform.dense.weight', 'mlm_score.transform.LayerNorm.bias', 'mlm_score.transform.dense.bias', 'bridgetower.vision_model.visual.conv1.weight', 'bridgetower.vision_model.visual.class_embedding']
+- This IS expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BridgeTowerForContrastiveLearning from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BridgeTowerForContrastiveLearning were not initialized from the model checkpoint at BridgeTower/bridgetower-large-itm-mlm-itc and are newly initialized: ['bridgetower.vision_model.visual.embeddings.position_ids', 'logit_scale']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+torch.Size([64, 100])
+2023-06-16 16:34:49 [INFO] Start auto tuning.
+2023-06-16 16:34:49 [INFO] Quantize model without tuning!
+2023-06-16 16:34:49 [INFO] Quantize the model with default configuration without evaluating the model.                To perform the tuning process, please either provide an eval_func or provide an                    eval_dataloader an eval_metric.
+2023-06-16 16:34:49 [INFO] Adaptor has 4 recipes.
+2023-06-16 16:34:49 [INFO] 1 recipes specified by user.
+2023-06-16 16:34:49 [INFO] 3 recipes require future tuning.
+2023-06-16 16:34:49 [INFO] *** Initialize auto tuning
+2023-06-16 16:34:49 [INFO] {
+2023-06-16 16:34:49 [INFO]     'PostTrainingQuantConfig': {
+2023-06-16 16:34:49 [INFO]         'AccuracyCriterion': {
+2023-06-16 16:34:49 [INFO]             'criterion': 'relative',
+2023-06-16 16:34:49 [INFO]             'higher_is_better': True,
+2023-06-16 16:34:49 [INFO]             'tolerable_loss': 0.01,
+2023-06-16 16:34:49 [INFO]             'absolute': None,
+2023-06-16 16:34:49 [INFO]             'keys': <bound method AccuracyCriterion.keys of <neural_compressor.config.AccuracyCriterion object at 0x7fa01971b1c0>>,
+2023-06-16 16:34:49 [INFO]             'relative': 0.01
+2023-06-16 16:34:49 [INFO]         },
+2023-06-16 16:34:49 [INFO]         'approach': 'post_training_static_quant',
+2023-06-16 16:34:49 [INFO]         'backend': 'ipex',
+2023-06-16 16:34:49 [INFO]         'calibration_sampling_size': [
+2023-06-16 16:34:49 [INFO]             64
+2023-06-16 16:34:49 [INFO]         ],
+2023-06-16 16:34:49 [INFO]         'device': 'cpu',
+2023-06-16 16:34:49 [INFO]         'diagnosis': False,
+2023-06-16 16:34:49 [INFO]         'domain': 'auto',
+2023-06-16 16:34:49 [INFO]         'example_inputs': None,
+2023-06-16 16:34:49 [INFO]         'excluded_precisions': [
+2023-06-16 16:34:49 [INFO]         ],
+2023-06-16 16:34:49 [INFO]         'framework': 'pytorch_ipex',
+2023-06-16 16:34:49 [INFO]         'inputs': [
+2023-06-16 16:34:49 [INFO]         ],
+2023-06-16 16:34:49 [INFO]         'model_name': '',
+2023-06-16 16:34:49 [INFO]         'op_name_dict': None,
+2023-06-16 16:34:49 [INFO]         'op_type_dict': {
+2023-06-16 16:34:49 [INFO]             'add': {
+2023-06-16 16:34:49 [INFO]                 'weight': {
+2023-06-16 16:34:49 [INFO]                     'dtype': [
+2023-06-16 16:34:49 [INFO]                         'fp32'
+2023-06-16 16:34:49 [INFO]                     ]
+2023-06-16 16:34:49 [INFO]                 },
+2023-06-16 16:34:49 [INFO]                 'activation': {
+2023-06-16 16:34:49 [INFO]                     'dtype': [
+2023-06-16 16:34:49 [INFO]                         'fp32'
+2023-06-16 16:34:49 [INFO]                     ]
+2023-06-16 16:34:49 [INFO]                 }
+2023-06-16 16:34:49 [INFO]             },
+2023-06-16 16:34:49 [INFO]             'linear': {
+2023-06-16 16:34:49 [INFO]                 'weight': {
+2023-06-16 16:34:49 [INFO]                     'dtype': [
+2023-06-16 16:34:49 [INFO]                         'int8'
+2023-06-16 16:34:49 [INFO]                     ],
+2023-06-16 16:34:49 [INFO]                     'scheme': [
+2023-06-16 16:34:49 [INFO]                         'sym'
+2023-06-16 16:34:49 [INFO]                     ],
+2023-06-16 16:34:49 [INFO]                     'granularity': [
+2023-06-16 16:34:49 [INFO]                         'per_channel'
+2023-06-16 16:34:49 [INFO]                     ],
+2023-06-16 16:34:49 [INFO]                     'algorithm': [
+2023-06-16 16:34:49 [INFO]                         'minmax'
+2023-06-16 16:34:49 [INFO]                     ]
+2023-06-16 16:34:49 [INFO]                 },
+2023-06-16 16:34:49 [INFO]                 'activation': {
+2023-06-16 16:34:49 [INFO]                     'dtype': [
+2023-06-16 16:34:49 [INFO]                         'uint8'
+2023-06-16 16:34:49 [INFO]                     ],
+2023-06-16 16:34:49 [INFO]                     'scheme': [
+2023-06-16 16:34:49 [INFO]                         'asym'
+2023-06-16 16:34:49 [INFO]                     ],
+2023-06-16 16:34:49 [INFO]                     'granularity': [
+2023-06-16 16:34:49 [INFO]                         'per_tensor'
+2023-06-16 16:34:49 [INFO]                     ],
+2023-06-16 16:34:49 [INFO]                     'algorithm': [
+2023-06-16 16:34:49 [INFO]                         'minmax'
+2023-06-16 16:34:49 [INFO]                     ]
+2023-06-16 16:34:49 [INFO]                 }
+2023-06-16 16:34:49 [INFO]             },
+2023-06-16 16:34:49 [INFO]             'Conv2d': {
+2023-06-16 16:34:49 [INFO]                 'weight': {
+2023-06-16 16:34:49 [INFO]                     'dtype': [
+2023-06-16 16:34:49 [INFO]                         'fp32'
+2023-06-16 16:34:49 [INFO]                     ]
+2023-06-16 16:34:49 [INFO]                 },
+2023-06-16 16:34:49 [INFO]                 'activation': {
+2023-06-16 16:34:49 [INFO]                     'dtype': [
+2023-06-16 16:34:49 [INFO]                         'fp32'
+2023-06-16 16:34:49 [INFO]                     ]
+2023-06-16 16:34:49 [INFO]                 }
+2023-06-16 16:34:49 [INFO]             },
+2023-06-16 16:34:49 [INFO]             'flatten': {
+2023-06-16 16:34:49 [INFO]                 'weight': {
+2023-06-16 16:34:49 [INFO]                     'dtype': [
+2023-06-16 16:34:49 [INFO]                         'fp32'
+2023-06-16 16:34:49 [INFO]                     ]
+2023-06-16 16:34:49 [INFO]                 },
+2023-06-16 16:34:49 [INFO]                 'activation': {
+2023-06-16 16:34:49 [INFO]                     'dtype': [
+2023-06-16 16:34:49 [INFO]                         'fp32'
+2023-06-16 16:34:49 [INFO]                     ]
+2023-06-16 16:34:49 [INFO]                 }
+2023-06-16 16:34:49 [INFO]             },
+2023-06-16 16:34:49 [INFO]             'matmul': {
+2023-06-16 16:34:49 [INFO]                 'weight': {
+2023-06-16 16:34:49 [INFO]                     'dtype': [
+2023-06-16 16:34:49 [INFO]                         'fp32'
+2023-06-16 16:34:49 [INFO]                     ]
+2023-06-16 16:34:49 [INFO]                 },
+2023-06-16 16:34:49 [INFO]                 'activation': {
+2023-06-16 16:34:49 [INFO]                     'dtype': [
+2023-06-16 16:34:49 [INFO]                         'fp32'
+2023-06-16 16:34:49 [INFO]                     ]
+2023-06-16 16:34:49 [INFO]                 }
+2023-06-16 16:34:49 [INFO]             }
+2023-06-16 16:34:49 [INFO]         },
+2023-06-16 16:34:49 [INFO]         'outputs': [
+2023-06-16 16:34:49 [INFO]         ],
+2023-06-16 16:34:49 [INFO]         'quant_format': 'default',
+2023-06-16 16:34:49 [INFO]         'quant_level': 'auto',
+2023-06-16 16:34:49 [INFO]         'recipes': {
+2023-06-16 16:34:49 [INFO]             'smooth_quant': True,
+2023-06-16 16:34:49 [INFO]             'smooth_quant_args': {
+2023-06-16 16:34:49 [INFO]                 'alpha': 0.5,
+2023-06-16 16:34:49 [INFO]                 'folding': False
+2023-06-16 16:34:49 [INFO]             },
+2023-06-16 16:34:49 [INFO]             'fast_bias_correction': False,
+2023-06-16 16:34:49 [INFO]             'weight_correction': False,
+2023-06-16 16:34:49 [INFO]             'gemm_to_matmul': True,
+2023-06-16 16:34:49 [INFO]             'graph_optimization_level': None,
+2023-06-16 16:34:49 [INFO]             'first_conv_or_matmul_quantization': True,
+2023-06-16 16:34:49 [INFO]             'last_conv_or_matmul_quantization': True,
+2023-06-16 16:34:49 [INFO]             'pre_post_process_quantization': True,
+2023-06-16 16:34:49 [INFO]             'add_qdq_pair_to_weight': False,
+2023-06-16 16:34:49 [INFO]             'optypes_to_exclude_output_quant': [
+2023-06-16 16:34:49 [INFO]             ],
+2023-06-16 16:34:49 [INFO]             'dedicated_qdq_pair': False
+2023-06-16 16:34:49 [INFO]         },
+2023-06-16 16:34:49 [INFO]         'reduce_range': None,
+2023-06-16 16:34:49 [INFO]         'TuningCriterion': {
+2023-06-16 16:34:49 [INFO]             'max_trials': 100,
+2023-06-16 16:34:49 [INFO]             'objective': 'performance',
+2023-06-16 16:34:49 [INFO]             'strategy': 'basic',
+2023-06-16 16:34:49 [INFO]             'strategy_kwargs': None,
+2023-06-16 16:34:49 [INFO]             'timeout': 0
+2023-06-16 16:34:49 [INFO]         },
+2023-06-16 16:34:49 [INFO]         'use_bf16': True
+2023-06-16 16:34:49 [INFO]     }
+2023-06-16 16:34:49 [INFO] }
+2023-06-16 16:34:49 [WARNING] [Strategy] Please install `mpi4py` correctly if using distributed tuning; otherwise, ignore this warning.
+2023-06-16 16:34:49 [WARNING] Fail to remove /home/rbrugaro/bridge-tower-backend/nc_workspace/2023-06-16_16-34-35/ipex_config_tmp.json.
+2023-06-16 16:34:49 [INFO]  Found 24 blocks
+2023-06-16 16:34:49 [INFO] Attention Blocks: 24
+2023-06-16 16:34:49 [INFO] FFN Blocks: 24
+2023-06-16 16:34:49 [WARNING] Smoothquant for ipex requires a deepcopy of model, please avoid out of memory.
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantize.py:93: UserWarning: BatchNorm folding failed during the prepare process.
+  warnings.warn("BatchNorm folding failed during the prepare process.")
+2023-06-16 16:35:51 [INFO] Attention Blocks : 
+2023-06-16 16:35:51 [INFO] [['bridgetower.text_model.encoder.layer.0.attention.self.query', 'bridgetower.text_model.encoder.layer.0.attention.self.key', 'bridgetower.text_model.encoder.layer.0.attention.self.value', 'bridgetower.text_model.encoder.layer.0.attention.output.dense'], ['bridgetower.text_model.encoder.layer.1.attention.self.query', 'bridgetower.text_model.encoder.layer.1.attention.self.key', 'bridgetower.text_model.encoder.layer.1.attention.self.value', 'bridgetower.text_model.encoder.layer.1.attention.output.dense'], ['bridgetower.text_model.encoder.layer.2.attention.self.query', 'bridgetower.text_model.encoder.layer.2.attention.self.key', 'bridgetower.text_model.encoder.layer.2.attention.self.value', 'bridgetower.text_model.encoder.layer.2.attention.output.dense'], ['bridgetower.text_model.encoder.layer.3.attention.self.query', 'bridgetower.text_model.encoder.layer.3.attention.self.key', 'bridgetower.text_model.encoder.layer.3.attention.self.value', 'bridgetower.text_model.encoder.layer.3.attention.output.dense'], ['bridgetower.text_model.encoder.layer.4.attention.self.query', 'bridgetower.text_model.encoder.layer.4.attention.self.key', 'bridgetower.text_model.encoder.layer.4.attention.self.value', 'bridgetower.text_model.encoder.layer.4.attention.output.dense'], ['bridgetower.text_model.encoder.layer.5.attention.self.query', 'bridgetower.text_model.encoder.layer.5.attention.self.key', 'bridgetower.text_model.encoder.layer.5.attention.self.value', 'bridgetower.text_model.encoder.layer.5.attention.output.dense'], ['bridgetower.text_model.encoder.layer.6.attention.self.query', 'bridgetower.text_model.encoder.layer.6.attention.self.key', 'bridgetower.text_model.encoder.layer.6.attention.self.value', 'bridgetower.text_model.encoder.layer.6.attention.output.dense'], ['bridgetower.text_model.encoder.layer.7.attention.self.query', 'bridgetower.text_model.encoder.layer.7.attention.self.key', 'bridgetower.text_model.encoder.layer.7.attention.self.value', 'bridgetower.text_model.encoder.layer.7.attention.output.dense'], ['bridgetower.text_model.encoder.layer.8.attention.self.query', 'bridgetower.text_model.encoder.layer.8.attention.self.key', 'bridgetower.text_model.encoder.layer.8.attention.self.value', 'bridgetower.text_model.encoder.layer.8.attention.output.dense'], ['bridgetower.text_model.encoder.layer.9.attention.self.query', 'bridgetower.text_model.encoder.layer.9.attention.self.key', 'bridgetower.text_model.encoder.layer.9.attention.self.value', 'bridgetower.text_model.encoder.layer.9.attention.output.dense'], ['bridgetower.text_model.encoder.layer.10.attention.self.query', 'bridgetower.text_model.encoder.layer.10.attention.self.key', 'bridgetower.text_model.encoder.layer.10.attention.self.value', 'bridgetower.text_model.encoder.layer.10.attention.output.dense'], ['bridgetower.text_model.encoder.layer.11.attention.self.query', 'bridgetower.text_model.encoder.layer.11.attention.self.key', 'bridgetower.text_model.encoder.layer.11.attention.self.value', 'bridgetower.text_model.encoder.layer.11.attention.output.dense'], ['bridgetower.text_model.encoder.layer.12.attention.self.query', 'bridgetower.text_model.encoder.layer.12.attention.self.key', 'bridgetower.text_model.encoder.layer.12.attention.self.value', 'bridgetower.text_model.encoder.layer.12.attention.output.dense'], ['bridgetower.text_model.encoder.layer.13.attention.self.query', 'bridgetower.text_model.encoder.layer.13.attention.self.key', 'bridgetower.text_model.encoder.layer.13.attention.self.value', 'bridgetower.text_model.encoder.layer.13.attention.output.dense'], ['bridgetower.text_model.encoder.layer.14.attention.self.query', 'bridgetower.text_model.encoder.layer.14.attention.self.key', 'bridgetower.text_model.encoder.layer.14.attention.self.value', 'bridgetower.text_model.encoder.layer.14.attention.output.dense'], ['bridgetower.text_model.encoder.layer.15.attention.self.query', 'bridgetower.text_model.encoder.layer.15.attention.self.key', 'bridgetower.text_model.encoder.layer.15.attention.self.value', 'bridgetower.text_model.encoder.layer.15.attention.output.dense'], ['bridgetower.text_model.encoder.layer.16.attention.self.query', 'bridgetower.text_model.encoder.layer.16.attention.self.key', 'bridgetower.text_model.encoder.layer.16.attention.self.value', 'bridgetower.text_model.encoder.layer.16.attention.output.dense'], ['bridgetower.text_model.encoder.layer.17.attention.self.query', 'bridgetower.text_model.encoder.layer.17.attention.self.key', 'bridgetower.text_model.encoder.layer.17.attention.self.value', 'bridgetower.text_model.encoder.layer.17.attention.output.dense'], ['bridgetower.text_model.encoder.layer.18.attention.self.query', 'bridgetower.text_model.encoder.layer.18.attention.self.key', 'bridgetower.text_model.encoder.layer.18.attention.self.value', 'bridgetower.text_model.encoder.layer.18.attention.output.dense'], ['bridgetower.text_model.encoder.layer.19.attention.self.query', 'bridgetower.text_model.encoder.layer.19.attention.self.key', 'bridgetower.text_model.encoder.layer.19.attention.self.value', 'bridgetower.text_model.encoder.layer.19.attention.output.dense'], ['bridgetower.text_model.encoder.layer.20.attention.self.query', 'bridgetower.text_model.encoder.layer.20.attention.self.key', 'bridgetower.text_model.encoder.layer.20.attention.self.value', 'bridgetower.text_model.encoder.layer.20.attention.output.dense'], ['bridgetower.text_model.encoder.layer.21.attention.self.query', 'bridgetower.text_model.encoder.layer.21.attention.self.key', 'bridgetower.text_model.encoder.layer.21.attention.self.value', 'bridgetower.text_model.encoder.layer.21.attention.output.dense'], ['bridgetower.text_model.encoder.layer.22.attention.self.query', 'bridgetower.text_model.encoder.layer.22.attention.self.key', 'bridgetower.text_model.encoder.layer.22.attention.self.value', 'bridgetower.text_model.encoder.layer.22.attention.output.dense'], ['bridgetower.text_model.encoder.layer.23.attention.self.query', 'bridgetower.text_model.encoder.layer.23.attention.self.key', 'bridgetower.text_model.encoder.layer.23.attention.self.value', 'bridgetower.text_model.encoder.layer.23.attention.output.dense']]
+2023-06-16 16:35:51 [INFO] FFN Blocks : 
+2023-06-16 16:35:51 [INFO] [['bridgetower.text_model.encoder.layer.0.intermediate.dense', 'bridgetower.text_model.encoder.layer.0.output.dense'], ['bridgetower.text_model.encoder.layer.1.intermediate.dense', 'bridgetower.text_model.encoder.layer.1.output.dense'], ['bridgetower.text_model.encoder.layer.2.intermediate.dense', 'bridgetower.text_model.encoder.layer.2.output.dense'], ['bridgetower.text_model.encoder.layer.3.intermediate.dense', 'bridgetower.text_model.encoder.layer.3.output.dense'], ['bridgetower.text_model.encoder.layer.4.intermediate.dense', 'bridgetower.text_model.encoder.layer.4.output.dense'], ['bridgetower.text_model.encoder.layer.5.intermediate.dense', 'bridgetower.text_model.encoder.layer.5.output.dense'], ['bridgetower.text_model.encoder.layer.6.intermediate.dense', 'bridgetower.text_model.encoder.layer.6.output.dense'], ['bridgetower.text_model.encoder.layer.7.intermediate.dense', 'bridgetower.text_model.encoder.layer.7.output.dense'], ['bridgetower.text_model.encoder.layer.8.intermediate.dense', 'bridgetower.text_model.encoder.layer.8.output.dense'], ['bridgetower.text_model.encoder.layer.9.intermediate.dense', 'bridgetower.text_model.encoder.layer.9.output.dense'], ['bridgetower.text_model.encoder.layer.10.intermediate.dense', 'bridgetower.text_model.encoder.layer.10.output.dense'], ['bridgetower.text_model.encoder.layer.11.intermediate.dense', 'bridgetower.text_model.encoder.layer.11.output.dense'], ['bridgetower.text_model.encoder.layer.12.intermediate.dense', 'bridgetower.text_model.encoder.layer.12.output.dense'], ['bridgetower.text_model.encoder.layer.13.intermediate.dense', 'bridgetower.text_model.encoder.layer.13.output.dense'], ['bridgetower.text_model.encoder.layer.14.intermediate.dense', 'bridgetower.text_model.encoder.layer.14.output.dense'], ['bridgetower.text_model.encoder.layer.15.intermediate.dense', 'bridgetower.text_model.encoder.layer.15.output.dense'], ['bridgetower.text_model.encoder.layer.16.intermediate.dense', 'bridgetower.text_model.encoder.layer.16.output.dense'], ['bridgetower.text_model.encoder.layer.17.intermediate.dense', 'bridgetower.text_model.encoder.layer.17.output.dense'], ['bridgetower.text_model.encoder.layer.18.intermediate.dense', 'bridgetower.text_model.encoder.layer.18.output.dense'], ['bridgetower.text_model.encoder.layer.19.intermediate.dense', 'bridgetower.text_model.encoder.layer.19.output.dense'], ['bridgetower.text_model.encoder.layer.20.intermediate.dense', 'bridgetower.text_model.encoder.layer.20.output.dense'], ['bridgetower.text_model.encoder.layer.21.intermediate.dense', 'bridgetower.text_model.encoder.layer.21.output.dense'], ['bridgetower.text_model.encoder.layer.22.intermediate.dense', 'bridgetower.text_model.encoder.layer.22.output.dense'], ['bridgetower.text_model.encoder.layer.23.intermediate.dense', 'bridgetower.text_model.encoder.layer.23.output.dense']]
+2023-06-16 16:35:51 [INFO] Pass query framework capability elapsed time: 62705.47 ms
+2023-06-16 16:35:51 [INFO] Do not evaluate the baseline and quantize the model with default configuration.
+2023-06-16 16:35:52 [INFO] Quantize the model with default config.
+2023-06-16 16:37:02 [WARNING] The calibration failed when calibrating with ipex, using scale info from SmoothQuant for Linear and one iter calibration for other ops.
+2023-06-16 16:37:13 [WARNING] SmoothQuant folding=False with bf16 may cause accuracy=0! Please consider setting excluded_precisions=['bf16'] in your config.
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state_utils.py:442: TracerWarning: Converting a tensor to a Python number might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  args, scale.item(), zp.item(), dtype
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state.py:452: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if scale.numel() > 1:
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state_utils.py:458: TracerWarning: Converting a tensor to a Python number might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  args, scale.item(), zp.item(), dtype
+/home/rbrugaro/anaconda3/envs/BT3/lib/python3.10/site-packages/intel_extension_for_pytorch/quantization/_quantization_state.py:602: TracerWarning: Converting a tensor to a Python number might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  output, scale.item(), zp.item(), inf_dtype
+2023-06-16 16:39:41 [INFO] |******Mixed Precision Statistics******|
+2023-06-16 16:39:41 [INFO] +----------------+-------+------+------+
+2023-06-16 16:39:41 [INFO] |    Op Type     | Total | INT8 | FP32 |
+2023-06-16 16:39:41 [INFO] +----------------+-------+------+------+
+2023-06-16 16:39:41 [INFO] |    add&add     |   10  |  10  |  0   |
+2023-06-16 16:39:41 [INFO] | Linear&add&add |   1   |  1   |  0   |
+2023-06-16 16:39:41 [INFO] |   Linear&add   |   1   |  1   |  0   |
+2023-06-16 16:39:41 [INFO] |    flatten     |   1   |  1   |  0   |
+2023-06-16 16:39:41 [INFO] |     Linear     |  269  | 269  |  0   |
+2023-06-16 16:39:41 [INFO] |      add       |  185  |  0   | 185  |
+2023-06-16 16:39:41 [INFO] |     matmul     |   99  |  0   |  99  |
+2023-06-16 16:39:41 [INFO] |     Conv2d     |   1   |  0   |  1   |
+2023-06-16 16:39:41 [INFO] +----------------+-------+------+------+
+2023-06-16 16:39:41 [INFO] Pass quantize model elapsed time: 208295.82 ms
+2023-06-16 16:39:41 [INFO] Save tuning history to /home/rbrugaro/bridge-tower-backend/nc_workspace/2023-06-16_16-34-35/./history.snapshot.
+2023-06-16 16:39:41 [INFO] Specified timeout or max trials is reached! Found a quantized model which meet accuracy goal. Exit.
+2023-06-16 16:39:41 [INFO] Save deploy yaml to /home/rbrugaro/bridge-tower-backend/nc_workspace/2023-06-16_16-34-35/deploy.yaml
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+[W kineto_shim.cpp:366] Profiler is not initialized: skipping step() invocation
+STAGE:2023-06-16 16:42:52 2386133:2386133 ActivityProfilerController.cpp:312] Completed Stage: Warm Up
+STAGE:2023-06-16 16:51:19 2386133:2386133 ActivityProfilerController.cpp:318] Completed Stage: Collection
+STAGE:2023-06-16 16:51:19 2386133:2386133 ActivityProfilerController.cpp:322] Completed Stage: Post Processing
+---------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                               Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls  
+---------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                      ProfilerStep*         0.31%        1.567s       100.00%      505.041s        5.050s           100  
+                                            forward         3.74%       18.873s        99.69%      503.474s        5.035s           100  
+                 aten::scaled_dot_product_attention         1.12%        5.658s        15.82%       79.901s      33.292ms          2400  
+           aten::_scaled_dot_product_attention_math         1.13%        5.723s        14.70%       74.243s      30.935ms          2400  
+                  fused_to_mul_to_mul_to_mul_to_mul        14.02%       70.810s        14.02%       70.810s     141.619ms           500  
+                                fused_to_mul_to_mul        11.06%       55.860s        11.06%       55.860s      46.550ms          1200  
+                                        aten::copy_        10.94%       55.270s        10.94%       55.270s       1.602ms         34500  
+                                   aten::contiguous         0.66%        3.326s         8.72%       44.056s       2.030ms         21700  
+                                       aten::matmul         0.09%     456.161ms         8.69%       43.869s       9.139ms          4800  
+                                          aten::bmm         4.74%       23.938s         8.54%       43.133s       8.986ms          4800  
+                           ipex_prepack::linear_run         8.13%       41.071s         8.27%       41.755s       4.539ms          9200  
+                                        aten::clone         0.20%        1.003s         8.20%       41.429s       2.423ms         17100  
+                fused_to_mul_mul_mul_mul_mul_to_mul         6.27%       31.645s         6.27%       31.645s      52.741ms           600  
+                                   aten::layer_norm         0.16%     801.814ms         6.16%       31.091s       2.190ms         14200  
+                             torch_ipex::layer_norm         3.69%       18.630s         6.00%       30.300s       2.134ms         14200  
+                          aten::quantize_per_tensor         4.67%       23.608s         4.73%       23.881s       1.012ms         23600  
+                                dil_mha_scores_calc         0.30%        1.537s         3.66%       18.464s       3.847ms          4800  
+                                           aten::to         0.66%        3.334s         3.65%       18.455s     750.197us         24600  
+                                      aten::softmax         0.00%      25.237ms         3.23%       16.312s       6.797ms          2400  
+                                     aten::_softmax         3.22%       16.287s         3.22%       16.287s       6.786ms          2400  
+---------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 505.041s
+
